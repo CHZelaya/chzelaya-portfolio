@@ -21,6 +21,16 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
+        
+        # 1. Restore Cache: Must be BEFORE 'pnpm install' and 'build'
+      - name: Restore Next.js cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -36,3 +46,12 @@ jobs:
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+
+      - name: Discord notification
+        if: always() 
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          title: "Build for ${{ github.repository }}"
+          description: "Branch: ${{ github.ref_name }}\nCommit: ${{ github.event.head_commit.message }}"
