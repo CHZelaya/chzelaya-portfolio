@@ -5,6 +5,7 @@ import { projectsType } from './projectsType'
 import { mediaType } from './mediaType'
 
 
+
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [technologyType, projectsType, mediaType],
+  types: [technologyType, projectsType, mediaType,],
 }
