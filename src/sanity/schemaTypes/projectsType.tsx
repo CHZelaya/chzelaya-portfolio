@@ -162,6 +162,5 @@ export const projectsType = defineType({
             title: 'Live Link',
             type: 'url',
         }),
-
     ],
 })

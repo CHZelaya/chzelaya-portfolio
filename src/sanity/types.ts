@@ -13,6 +13,36 @@
  */
 
 // Source: schema.json
+export type Media = {
+  _id: string;
+  _type: "Media";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featured?: boolean;
+  mediaType?: "Photography" | "Video";
+  photograghydetails?: {
+    camera?: string;
+    lens?: string;
+    focalLength?: string;
+    aperture?: string;
+    shutterSpeed?: string;
+    iso?: string;
+    location?: string;
+    editingSoftware?: string;
+    shootingMode?: string;
+    lightingConditions?: "Natural Light" | "Studio Lighting" | "Low Light" | "High Contrast" | "Backlit" | "Silhouette";
+  };
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
 export type Project = {
   _id: string;
   _type: "Project";
@@ -191,12 +221,6 @@ export type SanityImageHotspot = {
   width: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
-
 export type Technology = {
   _id: string;
   _type: "Technology";
@@ -316,5 +340,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Project | SanityImageCrop | SanityImageHotspot | Slug | Technology | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Media | Slug | Project | SanityImageCrop | SanityImageHotspot | Technology | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
