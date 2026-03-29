@@ -168,9 +168,65 @@
                   },
                   {
                     "type": "string",
-                    "value": "Silhouette"
+                    "value": "Golden Hour"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Blue Hour"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Night"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Twilight Hour"
                   }
                 ]
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "videoDetails": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "videoUrl": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "duration": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "location": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "year": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "caption": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
               },
               "optional": true
             }

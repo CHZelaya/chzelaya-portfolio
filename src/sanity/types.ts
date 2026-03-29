@@ -33,7 +33,14 @@ export type Media = {
     location?: string;
     editingSoftware?: string;
     shootingMode?: string;
-    lightingConditions?: "Natural Light" | "Studio Lighting" | "Low Light" | "High Contrast" | "Backlit" | "Silhouette";
+    lightingConditions?: "Natural Light" | "Studio Lighting" | "Low Light" | "High Contrast" | "Backlit" | "Golden Hour" | "Blue Hour" | "Night" | "Twilight Hour";
+  };
+  videoDetails?: {
+    videoUrl?: string;
+    duration?: string;
+    location?: string;
+    year?: string;
+    caption?: string;
   };
 };
 
