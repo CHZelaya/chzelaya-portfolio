@@ -1,8 +1,8 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
 
 export const projectsType = defineType({
-    name: 'Projects',
-    title: 'Projects',
+    name: 'Project',
+    title: 'Project',
     type: 'document',
     description: 'A project represents a case study of a software development project, including the problem, constraints, approach, execution, outcome, and reflection.',
     fields: [
@@ -77,7 +77,7 @@ export const projectsType = defineType({
                 }),
                 defineField({
                     name: 'execution',
-                    title: 'Excution',
+                    title: 'Execution',
                     type: 'array',
                     of: [defineArrayMember({
                         type: 'block',
@@ -146,8 +146,11 @@ export const projectsType = defineType({
         defineField({
             name: 'technologies',
             title: 'Technologies',
-            type: 'reference',
-            to: [{ type: 'Technology' }],
+            type: 'array',
+            of: [defineArrayMember({
+                type: 'reference',
+                to: [{ type: 'Technology' }],
+            })],
         }),
         defineField({
             name: 'githubLink',
