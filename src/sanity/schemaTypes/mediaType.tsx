@@ -88,10 +88,44 @@ export const mediaType = defineType({
                     title: 'Lighting Conditions',
                     type: 'string',
                     options: {
-                        list: ['Natural Light', 'Studio Lighting', 'Low Light', 'High Contrast', 'Backlit', 'Silhouette']
+                        list: ['Natural Light', 'Studio Lighting', 'Low Light', 'High Contrast', 'Backlit', 'Golden Hour', 'Blue Hour', 'Night', 'Twilight Hour']
                     },
                 })
             ],
         }),
+        defineField({
+            name: 'videoDetails',
+            title: 'Video Details',
+            type: 'object',
+            hidden: ({ document }) => document?.mediaType !== 'Video',
+            fields: [
+                defineField({
+                    name: 'videoUrl',
+                    title: 'Video URL',
+                    type: 'url',
+                }),
+                defineField({
+                    name: 'duration',
+                    title: 'Duration',
+                    type: 'string',
+                }),
+                defineField({
+                    name: 'location',
+                    title: 'Location',
+                    type: 'string',
+                }),
+                defineField({
+                    name: 'year',
+                    title: 'Year',
+                    type: 'string',
+                }),
+                defineField({
+                    name: 'caption',
+                    title: 'Caption',
+                    type: 'string',
+                }),
+            ]
+
+        })
     ],
 })
