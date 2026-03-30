@@ -236,7 +236,7 @@ export type Technology = {
   _rev: string;
   name?: string;
   slug?: Slug;
-  category?: Array<"Language" | "Framework" | "DevOps" | "Database" | "Devops" | "Tool">;
+  category?: Array<"Language" | "Framework" | "Library" | "DevOps" | "Database" | "Platform" | "Tool">;
   icon?: {
     asset?: {
       _ref: string;
@@ -248,50 +248,6 @@ export type Technology = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  };
-};
-
-export type About = {
-  _id: string;
-  _type: "About";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  shortBio?: string;
-  photo?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  resumeFile?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
-    media?: unknown;
-    _type: "file";
-  };
-  socials?: {
-    github?: {
-      url?: string;
-    };
-    linkedin?: {
-      url?: string;
-    };
-    instagram?: {
-      url?: string;
-    };
   };
 };
 
@@ -391,5 +347,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Media | Slug | Project | SanityImageCrop | SanityImageHotspot | Technology | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Media | Slug | Project | SanityImageCrop | SanityImageHotspot | Technology | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

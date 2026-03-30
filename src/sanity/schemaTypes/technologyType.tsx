@@ -28,9 +28,10 @@ export const technologyType = defineType({
                 options: {
                     list: ['Language',
                         'Framework',
+                        'Library',
                         'DevOps',
                         'Database',
-                        'Devops',
+                        'Platform',
                         'Tool',
 
                     ]
