@@ -1,7 +1,7 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
 
 export const aboutType = defineType({
-    name: 'About',
+    name: 'about',
     title: 'About',
     type: 'document',
     fields: [
