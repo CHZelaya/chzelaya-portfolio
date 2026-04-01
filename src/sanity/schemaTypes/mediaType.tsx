@@ -39,6 +39,14 @@ export const mediaType = defineType({
             hidden: ({ document }) => document?.mediaType !== 'Photography',
             fields: [
                 defineField({
+                    name: 'photo',
+                    title: 'Photo',
+                    type: 'image',
+                    options: {
+                        hotspot: true,
+                    },
+                }),
+                defineField({
                     name: 'camera',
                     title: 'Camera',
                     type: 'string',
