@@ -635,6 +635,94 @@ export type PROJECTS_QUERYResult = Array<{
   githubLink?: string;
   liveLink?: string;
 }>;
+// Variable: FEATURED_MEDIA_QUERY
+// Query: *[_type == "Media" && featured == true]
+export type FEATURED_MEDIA_QUERYResult = Array<{
+  _id: string;
+  _type: "Media";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featured: true;
+  mediaType?: "Photography" | "Video";
+  photograghydetails?: {
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    camera?: string;
+    lens?: string;
+    focalLength?: string;
+    aperture?: string;
+    shutterSpeed?: string;
+    iso?: string;
+    location?: string;
+    editingSoftware?: string;
+    shootingMode?: string;
+    lightingConditions?: "Backlit" | "Blue Hour" | "Golden Hour" | "High Contrast" | "Low Light" | "Natural Light" | "Night" | "Studio Lighting" | "Twilight Hour";
+  };
+  videoDetails?: {
+    videoUrl?: string;
+    duration?: string;
+    location?: string;
+    year?: string;
+    caption?: string;
+  };
+}>;
+// Variable: MEDIA_QUERY
+// Query: *[_type == "Media"]
+export type MEDIA_QUERYResult = Array<{
+  _id: string;
+  _type: "Media";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featured?: boolean;
+  mediaType?: "Photography" | "Video";
+  photograghydetails?: {
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    camera?: string;
+    lens?: string;
+    focalLength?: string;
+    aperture?: string;
+    shutterSpeed?: string;
+    iso?: string;
+    location?: string;
+    editingSoftware?: string;
+    shootingMode?: string;
+    lightingConditions?: "Backlit" | "Blue Hour" | "Golden Hour" | "High Contrast" | "Low Light" | "Natural Light" | "Night" | "Studio Lighting" | "Twilight Hour";
+  };
+  videoDetails?: {
+    videoUrl?: string;
+    duration?: string;
+    location?: string;
+    year?: string;
+    caption?: string;
+  };
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -643,5 +731,7 @@ declare module "@sanity/client" {
     "*[_type == \"about\" && _id == \"about\"][0]": ABOUT_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    technologies[]->{\n        name,\n        category,\n        icon\n    }\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]": PROJECTS_QUERYResult;
+    "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
+    "*[_type == \"Media\"]": MEDIA_QUERYResult;
   }
 }
