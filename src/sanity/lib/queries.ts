@@ -12,3 +12,7 @@ export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && feat
 }`);
 
 export const PROJECTS_QUERY = defineQuery(`*[_type == "Project"]`);
+
+export const FEATURED_MEDIA_QUERY = defineQuery(`*[_type == "Media" && featured == true]`);
+
+export const MEDIA_QUERY = defineQuery(`*[_type == "Media"]`);
