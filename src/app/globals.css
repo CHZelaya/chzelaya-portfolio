@@ -1,57 +1,38 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Mulish:wght@200;300;400&display=swap");
-@import "tailwindcss";
+/* ============================================================
+   betonotfound.dev — Color Theme
+   Soul Red × Navy Black × Off-White
+   ============================================================ */
 
-@theme {
-  /* ── Fonts ── */
-  --font-sans: "Mulish", sans-serif;
-  --font-serif: "Playfair Display", serif;
-  --font-serif-alt: "Fraunces", serif;
-  --font-mono: "Space Mono", monospace;
-  --font-mono-alt: "IBM Plex Mono", monospace;
+:root {
 
-  /* ── Easing ── */
-  --ease-panel: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+  /* Backgrounds */
+  --color-bg: #0D1117;
+  /* primary background — all three panels */
+  --color-bg-raise: #12181F;
+  /* slightly elevated surfaces, cards */
+  --color-bg-subtle: #1A2230;
+  /* hover states, input fields */
 
-/* ══════════════════════════════════════
-   ENGINEERING THEME — dark violet/indigo
-   Usage: data-theme="engineering"
-══════════════════════════════════════ */
-[data-theme="engineering"] {
-  --bg:           #0e0b1a;
-  --surface:      #16122a;
-  --accent:       #8b5cf6;
-  --accent-bright:#a78bfa;
-  --text:         #c4b8e8;
-  --muted:        #4a3f6e;
-  --border:       rgba(139, 92, 246, 0.15);
-}
+  /* Soul Red */
+  --color-accent: #C8102E;
+  /* primary accent — use sparingly */
+  --color-accent-dim: rgba(200, 16, 46, 0.15);
+  /* accent backgrounds, glows */
+  --color-accent-border: rgba(200, 16, 46, 0.35);
+  /* accent borders */
 
-/* ══════════════════════════════════════
-   ABOUT THEME — warm white/ivory
-   Usage: data-theme="about"
-══════════════════════════════════════ */
-[data-theme="about"] {
-  --bg:           #faf7f2;
-  --surface:      #f2ede4;
-  --accent:       #1a1a1a;
-  --accent-bright:#1a1a1a;
-  --text:         #1a1a1a;
-  --muted:        #9a9088;
-  --border:       rgba(26, 26, 26, 0.08);
-}
+  /* Typography */
+  --color-text: rgba(255, 255, 255, 0.88);
+  /* primary text */
+  --color-text-mid: rgba(255, 255, 255, 0.38);
+  /* secondary text */
+  --color-text-dim: rgba(255, 255, 255, 0.14);
+  /* placeholder, labels */
 
-/* ══════════════════════════════════════
-   PHOTOGRAPHY THEME — dark burnt amber
-   Usage: data-theme="photography"
-══════════════════════════════════════ */
-[data-theme="photography"] {
-  --bg:           #140c00;
-  --surface:      #1f1200;
-  --accent:       #d97706;
-  --accent-bright:#f59e0b;
-  --text:         #e8d5b0;
-  --muted:        #6b4e1a;
-  --border:       rgba(217, 119, 6, 0.15);
+  /* Borders & Dividers */
+  --color-border: rgba(255, 255, 255, 0.06);
+  /* subtle borders */
+  --color-border-mid: rgba(255, 255, 255, 0.12);
+  /* slightly visible borders */
+
 }

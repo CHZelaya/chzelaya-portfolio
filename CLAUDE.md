@@ -20,9 +20,9 @@ Run `pnpm typegen` after any change to files in `src/sanity/schemaTypes/`.
 The homepage (`src/app/page.tsx`) is a single-page app with three full-viewport panels arranged horizontally. Navigation is intentional — arrow buttons, keyboard arrows, touch swipe (50px threshold). The panel strip animates via `transform: translateX()`. **Center panel (About) is the landing state.**
 
 Panel order:
-- **Panel 0** — Software Engineering (`data-theme="engineering"`, dark violet)
-- **Panel 1** — About / Center (`data-theme="about"`, warm ivory) ← initial state
-- **Panel 2** — Photography & Film (`data-theme="photography"`, dark amber)
+- **Panel 0** — Software Engineering 
+- **Panel 1** — About / Center 
+- **Panel 2** — Photography & Film 
 
 Navigation UI (all fixed to viewport):
 - Left/right arrow buttons, vertically centered — left hidden on Panel 0, right hidden on Panel 2
@@ -82,12 +82,12 @@ const [about, featuredProjects, featuredMedia] = await Promise.all([
 
 ### Content schema (`src/sanity/schemaTypes/`)
 
-| Type | Notes |
-|---|---|
-| `about` | Singleton. name, slug, shortBio, photo, resumeFile, socials (github/linkedin/instagram) |
-| `Project` | Case study. title, slug, featured, coverImage, summary, year, `caseStudyBody` (portableText sections: problem/constraints/approach/execution/outcome/reflection), `caseStudyImages`, `technologies` (refs to Technology), githubLink, liveLink |
-| `Technology` | Referenced by `Project.technologies` |
-| `media` | Photography/film media asset |
+| Type Notes   |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `about`      | Singleton. name, slug, shortBio, photo, resumeFile, socials (github/linkedin/instagram)                                                                                                                                                        |
+| `Project`    | Case study. title, slug, featured, coverImage, summary, year, `caseStudyBody` (portableText sections: problem/constraints/approach/execution/outcome/reflection), `caseStudyImages`, `technologies` (refs to Technology), githubLink, liveLink |
+| `Technology` | Referenced by `Project.technologies`                                                                                                                                                                                                           |
+| `media`      | Photography/film media asset                                                                                                                                                                                                                   |
 
 Generated types live in `src/sanity/types.ts` — **do not edit manually**. Do not hand-write query result types; always run `pnpm typegen`.
 
@@ -111,4 +111,13 @@ Gitflow-lite: `feature/*` → `dev` (PR) → `main` (PR). GitHub Actions CI runs
 - **Tailwind CSS v4** via `@tailwindcss/postcss`
 - **next-sanity v11** — `defineLive`, `SanityLive`, `sanityFetch`
 - **Sanity v4** — embedded Studio, TypeGen
-- **Fonts**: Playfair Display, Space Mono, Fraunces, IBM Plex Mono, Mulish (loaded via Google Fonts in `globals.css`)
+
+
+## Typography
+
+- Display:    Bebas Neue — hero text, names, section titles
+- Monospace:  JetBrains Mono (300, 400) — UI labels, code, metadata, handles
+- Serif:      Cormorant Garamond (300, 300 italic) — captions, taglines, editorial moments
+
+Google Fonts import:
+https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap
