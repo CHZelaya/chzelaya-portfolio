@@ -6,6 +6,6 @@ interface MediaPanelProps {
 
 export default function MediaPanel({ featuredMedia }: MediaPanelProps) {
     return (
-        <p>Featured Media Component reporting in! I'm online!</p>
+        <p></p>
     );
 }

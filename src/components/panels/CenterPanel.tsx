@@ -1,45 +1,75 @@
-
-
-//* This is a placeholder for the center panel of the portfolio page. It will eventually contain the main content of the page, such as an introduction, projects, and contact information.
-
-//! Critical TODO's
-//TODO: Import ABOUT_QUERYResult from "@/sanity/types" and declare it in an interface for the props of this component. Then, use the data from the query being passed down from the pageClient to populate the content of this panel.
-
-// A map to reference fo the ABOUT_Qu ERYResult type:
-// ABOUT_QUERYResult {
-//     name: string;
-//     shortBio: string;
-//     profileImage: {
-//         url: string;
-//     };
-//     socialLinks: {
-//         github: string;
-//         linkedin: string;
-//         twitter: string;
-//     };
-// }
-
-
 import { ABOUT_QUERYResult } from "@/sanity/types";
 
 interface CenterPanelProps {
-    about: ABOUT_QUERYResult;
+  about: ABOUT_QUERYResult;
 }
 
 export default function CenterPanel({ about }: CenterPanelProps) {
-    return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans">
-            <main>
-                <h1 className="text-4xl font-bold mb-4 bg-white">The start of this portfolio page</h1>
-                <p className="text-lg text-gray-700 dark:text-gray-300">Testing data: {about?.name}</p>
-                <p className="text-md text-gray-600 dark:text-gray-400">Short Bio: {about?.shortBio}</p>
-                <p className=""> Social Links:</p>
-                <ul className="list-disc list-inside">
-                    <li>GitHub: {about?.socials?.github?.url}</li>
-                    <li>LinkedIn: {about?.socials?.linkedin?.url}</li>
-                    <li>Twitter: {about?.socials?.instagram?.url}</li>
-                </ul>
-            </main>
-        </div>
-    );
+  return (
+    /*
+     * THE PANEL SHELL
+     * ───────────────
+     * flex flex-col       → vertical stack (main axis = top→bottom)
+     * items-center        → center children horizontally (cross axis)
+     * justify-center      → center children vertically (main axis)
+     * relative            → establishes positioning context for absolute children
+     * h-full w-full       → fill the space PageClient gives us
+     * overflow-hidden     → clip anything that bleeds out
+     */
+    <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden bg-(--color-bg)">
+
+      {/* ── PANEL LABEL (top-left) ─────────────────────────────────────────*/}
+      <span className="absolute top-8 left-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text)">
+        About
+      </span>
+
+      <h1 className="font-display text-[clamp(3rem,5vw,5rem)] text-(--color-text) tracking-[0.06em] leading-[0.9] text-center">
+        {about?.name?.split(' ').join('\n') ?? 'Carlos\nBeto'}
+      </h1>
+
+      {/* ── RED RULE ───────────────────────────────────────────────────────
+       * A pure decorative element — just a box with no content.
+       * w-6 = 1.5rem, h-px = 1px. mx-auto centers a block element horizontally.
+       * my-[1.4rem] = vertical margin (arbitrary, matching the design's 1.4rem gap).
+       * bg-(--color-accent) = pulls from your CSS variable directly.
+       */}
+      <div className="w-6 h-px bg-(--color-accent) mx-auto my-[1.4rem]" />
+
+      {/* ── HANDLE ─────────────────────────────────────────────────────────
+       * text-(--color-accent) → Soul Red, matching the rule above.
+       * The name + rule + handle form a visual unit — same accent color ties them together.
+       */}
+      <p className="font-mono text-[0.6rem] font-light tracking-[0.25em] text-(--color-accent) text-center">
+        @betonotfound
+      </p>
+
+      {/* ── TAGLINE ───────────────────────────────────────────────────────*/}
+      <p className="font-serif italic text-[0.9rem] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[18ch]">
+        {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
+      </p>
+
+      {/* ── CTA BUTTON ───────────────────────────────────────────────────── */}
+      <a
+        href="#"
+        className="mt-[2.4rem] font-mono text-[0.55rem] font-normal tracking-[0.2em] uppercase text-(--color-text-dim) border border-(--color-border) px-[1.2rem] py-[0.6rem] transition-colors duration-200 hover:text-(--color-text) hover:border-(--color-accent) hover:bg-(--color-accent-dim)"
+      >
+        Enter ↗
+      </a>
+
+      {/* ── LOCATION (bottom-center) ────────────────────────────────────────*/}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-[0.4rem]">
+        {/* Pulsing dot — animate-pulse is a Tailwind animation utility */}
+        <span className="w-1 h-1 rounded-full bg-(--color-accent) animate-pulse" />
+        <span className="font-mono text-[0.52rem] font-light tracking-widest text-(--color-text-dim)">
+          Calgary, AB · Available Remotely
+        </span>
+      </div>
+
+      {/* ── PANEL NUMBER (bottom-right) ─────────────────────────────────── */}
+      <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
+        02
+      </span>
+
+    </div>
+  );
 }

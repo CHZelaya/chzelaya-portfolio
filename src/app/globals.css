@@ -1,38 +1,41 @@
+@import "tailwindcss";
+
 /* ============================================================
    betonotfound.dev — Color Theme
    Soul Red × Navy Black × Off-White
    ============================================================ */
 
+@theme {
+  --font-display: var(--font-bebas);
+  --font-mono:    var(--font-jetbrains);
+  --font-serif:   var(--font-cormorant);
+}
+
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
 :root {
 
   /* Backgrounds */
-  --color-bg: #0D1117;
-  /* primary background — all three panels */
-  --color-bg-raise: #12181F;
-  /* slightly elevated surfaces, cards */
+  --color-bg:        #0D1117;
+  --color-bg-raise:  #12181F;
   --color-bg-subtle: #1A2230;
-  /* hover states, input fields */
 
   /* Soul Red */
-  --color-accent: #C8102E;
-  /* primary accent — use sparingly */
-  --color-accent-dim: rgba(200, 16, 46, 0.15);
-  /* accent backgrounds, glows */
+  --color-accent:        #C8102E;
+  --color-accent-dim:    rgba(200, 16, 46, 0.15);
   --color-accent-border: rgba(200, 16, 46, 0.35);
-  /* accent borders */
 
   /* Typography */
-  --color-text: rgba(255, 255, 255, 0.88);
-  /* primary text */
+  --color-text:     rgba(255, 255, 255, 0.88);
   --color-text-mid: rgba(255, 255, 255, 0.38);
-  /* secondary text */
   --color-text-dim: rgba(255, 255, 255, 0.14);
-  /* placeholder, labels */
 
-  /* Borders & Dividers */
-  --color-border: rgba(255, 255, 255, 0.06);
-  /* subtle borders */
+  /* Borders */
+  --color-border:     rgba(255, 255, 255, 0.06);
   --color-border-mid: rgba(255, 255, 255, 0.12);
-  /* slightly visible borders */
 
 }

@@ -6,6 +6,6 @@ interface DevPanelProps {
 
 export default function DevPanel({ featuredProjects }: DevPanelProps) {
     return (
-        <p>Featured Projects Component reporting in! I'm online!</p>
+        <p></p>
     );
 }
