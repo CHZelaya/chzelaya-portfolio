@@ -452,25 +452,24 @@ export type ABOUT_QUERYResult = {
   };
 } | null;
 // Variable: FEATURED_PROJECTS_QUERY
-// Query: *[_type == "Project" && featured == true]{    title,    technologies[]->{        name,        category,        icon    }}
+// Query: *[_type == "Project" && featured == true]{    title,    coverImage,    summary,    year,    slug,}
 export type FEATURED_PROJECTS_QUERYResult = Array<{
   title: string | null;
-  technologies: Array<{
-    name: string | null;
-    category: Array<"Database" | "DevOps" | "Framework" | "Language" | "Library" | "Platform" | "Tool"> | null;
-    icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  }> | null;
+  coverImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  summary: string | null;
+  year: number | null;
+  slug: Slug | null;
 }>;
 // Variable: PROJECTS_QUERY
 // Query: *[_type == "Project"]
@@ -729,7 +728,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"about\" && _id == \"about\"][0]": ABOUT_QUERYResult;
-    "*[_type == \"Project\" && featured == true]{\n    title,\n    technologies[]->{\n        name,\n        category,\n        icon\n    }\n}": FEATURED_PROJECTS_QUERYResult;
+    "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]": PROJECTS_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
     "*[_type == \"Media\"]": MEDIA_QUERYResult;

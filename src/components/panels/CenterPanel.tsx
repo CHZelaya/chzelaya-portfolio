@@ -16,8 +16,7 @@ export default function CenterPanel({ about }: CenterPanelProps) {
      * h-full w-full       → fill the space PageClient gives us
      * overflow-hidden     → clip anything that bleeds out
      */
-    <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden bg-(--color-bg)">
-
+    <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden">
       {/* ── PANEL LABEL (top-left) ─────────────────────────────────────────*/}
       <span className="absolute top-8 left-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text)">
         About
@@ -44,7 +43,7 @@ export default function CenterPanel({ about }: CenterPanelProps) {
       </p>
 
       {/* ── TAGLINE ───────────────────────────────────────────────────────*/}
-      <p className="font-serif italic text-[0.9rem] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[18ch]">
+      <p className="font-serif italic text-2xl font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed">
         {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
       </p>
 
