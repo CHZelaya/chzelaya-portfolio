@@ -54,16 +54,6 @@ export default function CenterPanel({ about }: CenterPanelProps) {
       >
         Enter ↗
       </a>
-
-      {/* ── LOCATION (bottom-center) ────────────────────────────────────────*/}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-[0.4rem]">
-        {/* Pulsing dot — animate-pulse is a Tailwind animation utility */}
-        <span className="w-1 h-1 rounded-full bg-(--color-accent) animate-pulse" />
-        <span className="font-mono text-[0.52rem] font-light tracking-widest text-(--color-text-dim)">
-          Calgary, AB · Available Remotely
-        </span>
-      </div>
-
       {/* ── PANEL NUMBER (bottom-right) ─────────────────────────────────── */}
       <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
         02
