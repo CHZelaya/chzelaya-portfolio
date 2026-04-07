@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>betonotfound.dev — concept v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0D1117;
+    --bg-raise: #12181f;
+    --red:      #C8102E;
+    --red-dim:  rgba(200,16,46,0.15);
+    --white:    rgba(255,255,255,0.88);
+    --mid:      rgba(255,255,255,0.38);
+    --dim:      rgba(255,255,255,0.14);
+    --border:   rgba(255,255,255,0.06);
+    --mono:     'JetBrains Mono', monospace;
+    --serif:    'Cormorant Garamond', serif;
+    --display:  'Bebas Neue', sans-serif;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  #cursor {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+
+  #cursor-ring {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(200,16,46,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left 0.12s ease, top 0.12s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* ── DOT GRID CANVAS ── */
+  #dot-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── STAGE ── */
+  .stage {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── PANELS ── */
+  .panel {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .panel-dev    { animation-delay: 0.1s; }
+  .panel-about  { animation-delay: 0.25s; }
+  .panel-media  { animation-delay: 0.4s; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── DIVIDERS ── */
+  .divider {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--border) 15%,
+      var(--border) 85%,
+      transparent 100%
+    );
+    flex-shrink: 0;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.6s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* ── PANEL LABELS ── */
+  .panel-label {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* ── DEV PANEL ── */
+  .panel-dev {
+    align-items: flex-start;
+    padding: 0 3rem;
+  }
+
+  .dev-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .dev-line {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .dev-line .comment  { color: rgba(255,255,255,0.18); }
+  .dev-line .keyword  { color: #79B8FF; }
+  .dev-line .fn       { color: #B392F0; }
+  .dev-line .string   { color: #9ECBFF; }
+  .dev-line .accent   { color: var(--red); }
+  .dev-line .dim      { color: rgba(255,255,255,0.2); }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 0.45em;
+    height: 0.85em;
+    background: var(--red);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .dev-stack {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .stack-tag:hover {
+    color: var(--red);
+    border-color: var(--red-dim);
+  }
+
+  /* ── ABOUT PANEL ── */
+  .panel-about {
+    gap: 0;
+  }
+
+  .about-name {
+    font-family: var(--display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--white);
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    text-align: center;
+  }
+
+  .about-rule {
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+    margin: 1.4rem auto;
+  }
+
+  .about-handle {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--red);
+    text-align: center;
+  }
+
+  .about-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--mid);
+    text-align: center;
+    margin-top: 1.8rem;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    max-width: 18ch;
+  }
+
+  .about-cta {
+    margin-top: 2.4rem;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    cursor: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    text-align: center;
+  }
+
+  .about-cta:hover {
+    color: var(--white);
+    border-color: var(--red);
+    background: var(--red-dim);
+  }
+
+  .about-location {
+    position: absolute;
+    bottom: 2rem;
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .location-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* ── MEDIA PANEL ── */
+  .panel-media {
+    align-items: flex-end;
+    padding: 0 3rem;
+  }
+
+  .media-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .photo-frame {
+    width: 140px;
+    height: 175px;
+    background: var(--bg-raise);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* film grain overlay */
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: cover;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* inner gradient suggesting a photo */
+  .photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(255,255,255,0.03) 0%,
+      transparent 40%,
+      rgba(0,0,0,0.3) 100%
+    );
+  }
+
+  .photo-meta {
+    text-align: right;
+  }
+
+  .photo-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+    display: block;
+  }
+
+  .photo-coords {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .media-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to left, var(--red), transparent);
+    margin-top: 0.4rem;
+  }
+
+  /* ── NAV DOTS ── */
+  .nav-dots {
+    position: fixed;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.9s forwards;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--dim);
+    transition: all 0.3s ease;
+    cursor: none;
+  }
+
+  .dot.active {
+    background: var(--red);
+    width: 14px;
+    border-radius: 2px;
+  }
+
+  /* ── PANEL NUMBER ── */
+  .panel-num {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Dot grid -->
+<canvas id="dot-grid"></canvas>
+
+<div class="stage">
+
+  <!-- DEV PANEL -->
+  <div class="panel panel-dev">
+    <span class="panel-label">Software</span>
+    <div class="dev-content">
+      <div class="dev-line"><span class="comment">// building things that work</span></div>
+      <div class="dev-line" style="margin-top:0.4rem">
+        <span class="keyword">const</span> <span class="accent">beto</span> <span class="dim">=</span> <span class="fn">developer</span><span class="dim">(</span><span class="string">'self-taught'</span><span class="dim">);</span>
+      </div>
+      <div class="dev-line">
+        <span class="accent">beto</span><span class="dim">.</span><span class="fn">init</span><span class="dim">()</span><span class="cursor-blink"></span>
+      </div>
+      <div class="dev-stack">
+        <span class="stack-tag">Next.js</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">TypeScript</span>
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">Spring</span>
+        <span class="stack-tag">PostgreSQL</span>
+      </div>
+    </div>
+    <span class="panel-num">01</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT PANEL -->
+  <div class="panel panel-about">
+    <span class="panel-label">About</span>
+    <div class="about-name">Carlos<br>Beto</div>
+    <div class="about-rule"></div>
+    <div class="about-handle">@betonotfound</div>
+    <div class="about-tagline">developer by pursuit,<br>photographer by instinct</div>
+    <div class="about-cta">Enter ↗</div>
+    <div class="about-location">
+      <span class="location-dot"></span>
+      Calgary, AB · Available Remotely
+    </div>
+    <span class="panel-num">02</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MEDIA PANEL -->
+  <div class="panel panel-media">
+    <span class="panel-label">Photography</span>
+    <div class="media-content">
+      <div class="photo-frame"></div>
+      <div class="photo-meta">
+        <span class="photo-title">somewhere, sometime</span>
+        <span class="photo-coords">51.0447° N · 114.0719° W</span>
+      </div>
+      <div class="media-rule"></div>
+    </div>
+    <span class="panel-num">03</span>
+  </div>
+
+</div>
+
+<!-- Nav dots -->
+<div class="nav-dots">
+  <div class="dot"></div>
+  <div class="dot active"></div>
+  <div class="dot"></div>
+</div>
+
+<script>
+  // ── CURSOR ──
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  let mx = 0, my = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+    ring.style.left   = mx + 'px';
+    ring.style.top    = my + 'px';
+  });
+
+  // ── DOT GRID ──
+  const canvas = document.getElementById('dot-grid');
+  const ctx    = canvas.getContext('2d');
+  const SPACING = 28;
+  const DOT_R   = 1;
+  const GLOW_R  = 110;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cols = Math.ceil(canvas.width  / SPACING) + 1;
+    const rows = Math.ceil(canvas.height / SPACING) + 1;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = c * SPACING;
+        const y = r * SPACING;
+
+        const dx   = x - mx;
+        const dy   = y - my;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const glow = Math.max(0, 1 - dist / GLOW_R);
+
+        // base opacity + red glow near cursor
+        const baseAlpha = 0.1;
+        const r_val = Math.round(200 * glow + 255 * (1 - glow));
+        const g_val = Math.round(16  * glow);
+        const b_val = Math.round(46  * glow);
+        const alpha = baseAlpha + glow * 0.55;
+
+        ctx.beginPath();
+        ctx.arc(x, y, DOT_R + glow * 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r_val},${g_val},${b_val},${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    requestAnimationFrame(drawGrid);
+  }
+
+  drawGrid();
+</script>
+</body>
+</html>

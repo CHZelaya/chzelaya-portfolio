@@ -3,8 +3,6 @@ import {
   ABOUT_QUERY,
   FEATURED_MEDIA_QUERY,
   FEATURED_PROJECTS_QUERY,
-  MEDIA_QUERY,
-  PROJECTS_QUERY
 } from "@/sanity/lib/queries";
 import PageClient from "./pageClient";
 
