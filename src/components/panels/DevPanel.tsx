@@ -1,11 +1,25 @@
+'use client';
+
+import { motion } from 'motion/react';
 import { FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
 import ProjectCard from "@/components/cards/ProjectCard";
 
 interface DevPanelProps {
     featuredProjects: FEATURED_PROJECTS_QUERYResult;
+    isActive: boolean;
 }
 
-export default function DevPanel({ featuredProjects }: DevPanelProps) {
+const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+};
+
+const item = {
+    hidden:  { opacity: 0, y: 14 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const } },
+};
+
+export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) {
     return (
         <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
 
@@ -21,30 +35,34 @@ export default function DevPanel({ featuredProjects }: DevPanelProps) {
             </span>
 
             {/* Inner content */}
-            <div className="relative z-10 w-[min(820px,88vw)]">
-
+            <motion.div
+                className="relative z-10 w-[min(820px,88vw)]"
+                variants={container}
+                initial="hidden"
+                animate={isActive ? 'visible' : 'hidden'}
+            >
                 {/* Eyebrow */}
-                <div className="mb-8 flex items-center gap-4 font-mono text-[0.6rem] tracking-[0.3em] uppercase text-(--color-accent)">
+                <motion.div variants={item} className="mb-8 flex items-center gap-4 font-mono text-[0.6rem] tracking-[0.3em] uppercase text-(--color-accent)">
                     Software Engineering
                     <span
                         className="h-px w-16 shrink-0 bg-(--color-accent)"
                         style={{ opacity: 0.4 }}
                     />
-                </div>
+                </motion.div>
 
                 {/* Headline */}
-                <h1 className="mb-4 font-display text-[clamp(2.8rem,5.5vw,5rem)] leading-[0.95] tracking-[0.04em] text-(--color-text)">
+                <motion.h1 variants={item} className="mb-4 font-display text-[clamp(2.8rem,5.5vw,5rem)] leading-[0.95] tracking-[0.04em] text-(--color-text)">
                     Systems built<br />with intention.
-                </h1>
+                </motion.h1>
 
                 {/* Tagline */}
-                <p className="mb-10 max-w-105 font-serif italic font-light text-2xl leading-relaxed text-(--color-text-mid)">
+                <motion.p variants={item} className="mb-10 max-w-105 font-serif italic font-light text-2xl leading-relaxed text-(--color-text-mid)">
                     Full-stack solutions focused on clean code, thoughtful APIs,
                     and interfaces that don&apos;t get in the way.
-                </p>
+                </motion.p>
 
                 {/* Project grid */}
-                <div className="grid grid-cols-3 overflow-hidden border border-(--color-border)">
+                <motion.div variants={item} className="grid grid-cols-3 overflow-hidden border border-(--color-border)">
                     {featuredProjects?.map((project, i) => (
                         <div
                             key={project.slug?.current}
@@ -53,8 +71,8 @@ export default function DevPanel({ featuredProjects }: DevPanelProps) {
                             <ProjectCard project={project} index={i} />
                         </div>
                     ))}
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             {/* Panel number */}
             <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text-dim)">
