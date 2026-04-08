@@ -9,6 +9,7 @@
   --font-display: var(--font-bebas);
   --font-mono:    var(--font-jetbrains);
   --font-serif:   var(--font-cormorant);
+  --font-hand:    var(--font-caveat);
 }
 
 html, body {
