@@ -1,12 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import { ABOUT_QUERYResult, FEATURED_MEDIA_QUERYResult, FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
 import { CenterPanel, DevPanel, MediaPanel } from "@/components/panels";
 import DotGrid from "@/components/ui/DotGrid";
+import ArrowLeft from '@/components/ui/ArrowLeft';
+import ArrowRight from '@/components/ui/ArrowRight';
 
 const ZONES = ['Engineering', 'About', 'Photography'];
-const EASE = 'cubic-bezier(0.77, 0, 0.175, 1)';
 const OFFSETS = ['0vw', '-100vw', '-200vw'];
 
 interface PageClientProps {
@@ -25,7 +27,6 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
     animating.current = true;
     currentRef.current = i;
     setCurrent(i);
-    setTimeout(() => { animating.current = false; }, 900);
   }, []);
 
   // Keyboard navigation
@@ -65,63 +66,50 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       </div>
 
       {/* Horizontal stage */}
-      <div
+      <motion.div
         className="relative z-1 flex h-screen"
-        style={{
-          width: '300vw',
-          transform: `translateX(${OFFSETS[current]})`,
-          transition: `transform 0.9s ${EASE}`,
-          willChange: 'transform',
-        }}
+        style={{ width: '300vw' }}
+        initial={{ x: OFFSETS[1] }}
+        animate={{ x: OFFSETS[current] }}
+        transition={{ type: 'spring', stiffness: 280, damping: 34 }}
+        onAnimationComplete={() => { animating.current = false; }}
       >
         {/* Panel 0 — Dev / Engineering */}
         <div className="h-screen w-screen shrink-0 overflow-y-auto">
-          <DevPanel featuredProjects={featuredProjects} />
+          <DevPanel featuredProjects={featuredProjects} isActive={current === 0} />
         </div>
 
         {/* Panel 1 — About / Center */}
         <div className="h-screen w-screen shrink-0 overflow-y-auto">
-          <CenterPanel about={about} />
+          <CenterPanel about={about} isActive={current === 1} />
         </div>
 
         {/* Panel 2 — Photography / Media */}
         <div className="h-screen w-screen shrink-0 overflow-y-auto">
-          <MediaPanel featuredMedia={featuredMedia} />
+          <MediaPanel featuredMedia={featuredMedia} isActive={current === 2} />
         </div>
-      </div>
+      </motion.div>
 
       {/* Left arrow */}
       <button
         onClick={() => goTo(current - 1)}
         aria-label="Previous panel"
-        className={`
-          fixed left-6 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center
-          rounded-full border border-(--color-border) bg-black/30 backdrop-blur-md
-          transition-[opacity,transform,border-color,background] duration-300
-          hover:border-(--color-border-mid) hover:bg-white/5
-          ${current === 0 ? 'pointer-events-none scale-[0.8] opacity-0' : 'scale-100 opacity-100'}
-        `}
+        className={`fixed left-6 top-1/2 z-50 -translate-y-1/2 transition-[opacity,transform] duration-300 ${
+          current === 0 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
+        }`}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
+        <ArrowLeft />
       </button>
 
       {/* Right arrow */}
       <button
         onClick={() => goTo(current + 1)}
         aria-label="Next panel"
-        className={`
-          fixed right-6 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center
-          rounded-full border border-(--color-border) bg-black/30 backdrop-blur-md
-          transition-[opacity,transform,border-color,background] duration-300
-          hover:border-(--color-border-mid) hover:bg-white/5
-          ${current === 2 ? 'pointer-events-none scale-[0.8] opacity-0' : 'scale-100 opacity-100'}
-        `}
+        className={`fixed right-6 top-1/2 z-50 -translate-y-1/2 transition-[opacity,transform] duration-300 ${
+          current === 2 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
+        }`}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M9 18l6-6-6-6" />
-        </svg>
+        <ArrowRight />
       </button>
 
       {/* Nav dots — bottom center */}
