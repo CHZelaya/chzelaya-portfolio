@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
+import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat } from "next/font/google";
 import "./globals.css";
 
 const bebas = Bebas_Neue({
@@ -24,6 +24,13 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const caveat = Caveat({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "betonotfound.dev",
   description: "Developer & photographer.",
@@ -35,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bebas.variable} ${jetbrains.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${bebas.variable} ${jetbrains.variable} ${cormorant.variable} ${caveat.variable}`}>
       <body>{children}</body>
     </html>
   );

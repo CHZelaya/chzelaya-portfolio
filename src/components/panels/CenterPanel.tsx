@@ -2,10 +2,14 @@
 
 import { motion } from 'motion/react';
 import { ABOUT_QUERYResult } from "@/sanity/types";
+import ArrowLeft from '@/components/ui/ArrowLeft';
+import ArrowRight from '@/components/ui/ArrowRight';
+import HelperText from '@/components/ui/HelperText';
 
 interface CenterPanelProps {
   about: ABOUT_QUERYResult;
   isActive: boolean;
+  onGoTo: (i: number) => void;
 }
 
 const container = {
@@ -18,16 +22,16 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const } },
 };
 
-export default function CenterPanel({ about, isActive }: CenterPanelProps) {
+export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProps) {
   return (
     <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden">
-      {/* Panel label */}
+
       <span className="absolute top-8 left-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text)">
         About
       </span>
 
       <motion.div
-        className="flex flex-col items-center"
+        className="flex flex-col items-center w-full max-w-sm lg:max-w-none px-8 sm:px-12 lg:px-0"
         variants={container}
         initial="hidden"
         animate={isActive ? 'visible' : 'hidden'}
@@ -42,7 +46,7 @@ export default function CenterPanel({ about, isActive }: CenterPanelProps) {
           @betonotfound
         </motion.p>
 
-        <motion.p variants={item} className="font-serif italic text-2xl font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed">
+        <motion.p variants={item} className="font-serif italic text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[28ch]">
           {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
         </motion.p>
 
@@ -53,6 +57,18 @@ export default function CenterPanel({ about, isActive }: CenterPanelProps) {
         >
           Enter ↗
         </motion.a>
+
+        {/* Mobile navigation arrows — in flow, hidden on desktop */}
+        <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 lg:hidden">
+          <button onClick={() => onGoTo(0)} className="flex items-center gap-2 cursor-pointer">
+            <ArrowLeft />
+            <HelperText key="mobile-left" text="What I build" />
+          </button>
+          <button onClick={() => onGoTo(2)} className="flex items-center gap-2 cursor-pointer">
+            <HelperText key="mobile-right" text="What I shoot" />
+            <ArrowRight />
+          </button>
+        </motion.div>
       </motion.div>
 
       {/* Panel number */}
