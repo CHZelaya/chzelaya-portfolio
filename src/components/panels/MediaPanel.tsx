@@ -104,8 +104,7 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                     </h1>
 
                     <p className="max-w-[320px] font-serif italic font-light text-2xl leading-relaxed text-(--color-text-mid)">
-                        Candid portraiture and environmental work. Shot on digital
-                        and 35mm. Looking for the moment just before the moment.
+                        Before the code there was the camera. Weddings, families, pets, landscapes around Calgary. I stepped back from client work to focus on software, but the eye for a good frame never really switches off.
                     </p>
                 </motion.div>
 
@@ -115,7 +114,7 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                 </motion.div>
 
                 {/* Panel number */}
-                <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-texts)">
+                <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
                     03
                 </span>
             </motion.div>
