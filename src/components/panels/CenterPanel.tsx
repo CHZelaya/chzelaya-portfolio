@@ -36,13 +36,15 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
           {about?.name?.split(' ').join('\n') ?? 'Carlos\nBeto'}
         </motion.h1>
 
+        {/* Thin Red Seperator */}
         <motion.div variants={item} className="w-6 h-px bg-(--color-accent) mx-auto my-[1.4rem]" />
 
-        <motion.p variants={item} className="font-mono text-[0.6rem] font-light tracking-[0.25em] text-(--color-accent) text-center">
-          @betonotfound
+        <motion.p variants={item} className="font-mono text-bold text-[0.7rem] font-light tracking-[0.25em] text-(--color-accent) text-center">
+          Arrow Keys/Swipe to navigate
         </motion.p>
 
-        <motion.p variants={item} className="font-serif italic text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
+        {/* Short Bio */}
+        <motion.p variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
           {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
         </motion.p>
 
@@ -55,7 +57,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         </motion.a>
 
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
-        <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 lg:hidden">
+        <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 md:hidden">
           <button onClick={() => onGoTo(0)} className="flex flex-col-reverse items-center gap-2 cursor-pointer">
             <HelperText key="mobile-left" text="What I build" />
             <ArrowLeft />

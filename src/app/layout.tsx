@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat } from "next/font/google";
+import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat, Nunito } from "next/font/google";
 import "./globals.css";
 
 const bebas = Bebas_Neue({
@@ -31,6 +31,13 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const nunito = Nunito({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+  variable: "--font-nunito",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "betonotfound.dev",
   description: "Developer & photographer.",
@@ -42,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bebas.variable} ${jetbrains.variable} ${cormorant.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${bebas.variable} ${jetbrains.variable} ${cormorant.variable} ${caveat.variable} ${nunito.variable}`}>
       <body>{children}</body>
     </html>
   );

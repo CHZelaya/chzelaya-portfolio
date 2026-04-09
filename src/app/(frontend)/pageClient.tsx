@@ -94,7 +94,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       </motion.div>
 
       {/* Left Arrow + hint */}
-      <button onClick={() => goTo(current - 1)} aria-label="Previous panel" className={`hidden lg:block fixed left-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 0 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
+      <button onClick={() => goTo(current - 1)} aria-label="Previous panel" className={`hidden md:block fixed left-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 0 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
         <div className="flex flex-col-reverse items-center gap-3">
           <HelperText
@@ -108,7 +108,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       </button>
 
       {/* Right Arrow + hint */}
-      <button onClick={() => goTo(current + 1)} aria-label="Next panel" className={`hidden lg:block fixed right-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 2 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
+      <button onClick={() => goTo(current + 1)} aria-label="Next panel" className={`hidden md:block fixed right-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 2 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
         <div className="flex flex-col items-center gap-3">
           <HelperText
