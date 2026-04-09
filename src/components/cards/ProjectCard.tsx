@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
+import { motion } from "motion/react";
 
 type ProjectCardProps = {
     project: FEATURED_PROJECTS_QUERYResult[number];
@@ -13,7 +14,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
     return (
         <Link href={href} className="group block h-full">
-            <article className="relative h-full overflow-hidden bg-(--color-bg-raise) p-6 lg:p-8 min-h-[45] lg:min-h-[60] transition-all duration-300 hover:bg-(--color-bg-subtle)">
+            <motion.article
+                className="relative h-full overflow-hidden bg-(--color-bg-raise) p-6 lg:p-8 transition-all duration-300 hover:bg-(--color-bg-subtle)"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
 
                 {/* Top accent bar */}
                 <div
@@ -33,7 +40,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
                 {/* Summary */}
                 {summary && (
-                    <p className="mt-3 font-serif italic font-light text-sm lg:text-base leading-relaxed text-(--color-text-mid)  transition-colors duration-300 group-hover:text-(--color-text)">
+                    <p className="mt-3 font-serif italic font-light text-sm lg:text-base leading-relaxed text-(--color-text-mid) transition-colors duration-300 group-hover:text-(--color-text)">
                         {summary}
                     </p>
                 )}
@@ -46,7 +53,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     <span className="text-(--color-accent) text-xs">→</span>
                 </div>
 
-            </article>
+            </motion.article>
         </Link>
     );
 }

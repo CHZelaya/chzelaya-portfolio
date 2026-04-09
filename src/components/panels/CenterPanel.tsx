@@ -27,7 +27,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
     <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden">
 
       <motion.div
-        className="flex flex-col items-center w-full max-w-sm lg:max-w-none px-8 sm:px-12 lg:px-0"
+        className="flex flex-col items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         variants={container}
         initial="hidden"
         animate={isActive ? 'visible' : 'hidden'}
