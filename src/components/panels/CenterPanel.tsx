@@ -26,10 +26,6 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
   return (
     <div className="flex flex-col items-center justify-center relative min-h-screen w-full overflow-hidden">
 
-      <span className="absolute top-8 left-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text)">
-        About
-      </span>
-
       <motion.div
         className="flex flex-col items-center w-full max-w-sm lg:max-w-none px-8 sm:px-12 lg:px-0"
         variants={container}
@@ -60,11 +56,12 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
 
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
         <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 lg:hidden">
-          <button onClick={() => onGoTo(0)} className="flex items-center gap-2 cursor-pointer">
-            <ArrowLeft />
+          <button onClick={() => onGoTo(0)} className="flex flex-col-reverse items-center gap-2 cursor-pointer">
             <HelperText key="mobile-left" text="What I build" />
+            <ArrowLeft />
+
           </button>
-          <button onClick={() => onGoTo(2)} className="flex items-center gap-2 cursor-pointer">
+          <button onClick={() => onGoTo(2)} className="flex flex-col items-center gap-2 cursor-pointer">
             <HelperText key="mobile-right" text="What I shoot" />
             <ArrowRight />
           </button>

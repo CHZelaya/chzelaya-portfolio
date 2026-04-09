@@ -15,7 +15,7 @@ const container = {
 };
 
 const item = {
-    hidden:  { opacity: 0, y: 14 },
+    hidden: { opacity: 0, y: 14 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const } },
 };
 
@@ -28,11 +28,6 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                 className="pointer-events-none absolute -left-[20%] -top-[30%] h-[80vh] w-[80vh] rounded-full"
                 style={{ background: "radial-gradient(circle, rgba(200,16,46,0.07) 0%, transparent 65%)" }}
             />
-
-            {/* Panel label */}
-            <span className="absolute left-8 top-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text-dim)">
-                Software
-            </span>
 
             {/* Inner content */}
             <motion.div
@@ -62,7 +57,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                 </motion.p>
 
                 {/* Project grid */}
-                <motion.div variants={item} className="grid grid-cols-3 overflow-hidden border border-(--color-border)">
+                <motion.div variants={item} className="grid grid-cols-2 items-stretch overflow-hidden border border-(--color-border)">
                     {featuredProjects?.map((project, i) => (
                         <div
                             key={project.slug?.current}
@@ -75,7 +70,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
             </motion.div>
 
             {/* Panel number */}
-            <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text-dim)">
+            <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
                 01
             </span>
         </div>

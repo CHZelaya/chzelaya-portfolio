@@ -7,9 +7,9 @@
 
 @theme {
   --font-display: var(--font-bebas);
-  --font-mono:    var(--font-jetbrains);
-  --font-serif:   var(--font-cormorant);
-  --font-hand:    var(--font-caveat);
+  --font-mono: var(--font-jetbrains);
+  --font-serif: var(--font-cormorant);
+  --font-hand: var(--font-caveat);
 }
 
 html, body {
@@ -21,22 +21,22 @@ html, body {
 :root {
 
   /* Backgrounds */
-  --color-bg:        #0D1117;
-  --color-bg-raise:  #12181F;
+  --color-bg: #0D1117;
+  --color-bg-raise: #12181F;
   --color-bg-subtle: #1A2230;
 
   /* Soul Red */
-  --color-accent:        #C8102E;
-  --color-accent-dim:    rgba(200, 16, 46, 0.15);
+  --color-accent: #C8102E;
+  --color-accent-dim: rgba(200, 16, 46, 0.15);
   --color-accent-border: rgba(200, 16, 46, 0.35);
 
   /* Typography */
-  --color-text:     rgba(255, 255, 255, 0.88);
+  --color-text: rgba(255, 255, 255, 0.88);
   --color-text-mid: rgba(255, 255, 255, 0.38);
   --color-text-dim: rgba(255, 255, 255, 0.14);
 
   /* Borders */
-  --color-border:     rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.06);
   --color-border-mid: rgba(255, 255, 255, 0.12);
 
 }

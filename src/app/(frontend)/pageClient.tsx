@@ -9,7 +9,7 @@ import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
 import HelperText from '@/components/ui/HelperText';
 
-const ZONES = ['Engineering', 'About', 'Photography'];
+const ZONES = ['Software Development', 'About', 'Photography'];
 const OFFSETS = ['0vw', '-100vw', '-200vw'];
 
 interface PageClientProps {
@@ -62,7 +62,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       <DotGrid />
 
       {/* Zone label — top center */}
-      <div className="pointer-events-none fixed left-1/2 top-7 z-50 -translate-x-1/2 font-mono text-[0.55rem] tracking-[0.25em] uppercase text-(--color-text-dim)">
+      <div className="pointer-events-none fixed left-1/2 top-7 z-50 -translate-x-1/2 font-mono text-[0.55rem] tracking-[0.25em] uppercase text-(--color-text)">
         {ZONES[current]}
       </div>
 
@@ -94,19 +94,21 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       {/* Left Arrow + hint */}
       <button onClick={() => goTo(current - 1)} aria-label="Previous panel" className={`hidden lg:block fixed left-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 0 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
-        <div className="flex items-center gap-3">
-          <ArrowLeft />
+        <div className="flex flex-col-reverse items-center gap-3">
           <HelperText
             key={current === 2 ? 'media-left' : 'default-left'}
             text={current === 2 ? 'The full picture' : 'What I build'}
+            rotation={-8}
           />
+          <ArrowLeft />
+
         </div>
       </button>
 
       {/* Right Arrow + hint */}
       <button onClick={() => goTo(current + 1)} aria-label="Next panel" className={`hidden lg:block fixed right-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 2 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col items-center gap-3">
           <HelperText
             key={current === 0 ? 'dev-right' : 'default-right'}
             text={current === 0 ? 'The person' : 'What I shoot'}
