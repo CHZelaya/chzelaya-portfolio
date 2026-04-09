@@ -52,7 +52,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
                 {/* Tagline */}
                 <motion.p variants={item} className="mb-10 max-w-105 font-serif italic font-light text-2xl leading-relaxed text-(--color-text-mid)">
-                    Every project here started with a real problem and a blank repo. Some shipped cleanly, some taught hard lessons. The case studies don't skip the hard parts.
+                    Every project here started with a real problem and a blank repo. Some shipped cleanly, some taught hard lessons. The case studies don&apos;t skip the hard parts.
                 </motion.p>
 
                 {/* Project grid */}
