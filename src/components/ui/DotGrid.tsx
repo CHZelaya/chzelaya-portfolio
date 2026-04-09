@@ -19,7 +19,7 @@ export default function DotGrid() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        isMobile.current = window.matchMedia('(pointer: coarse)').matches;
+        isMobile.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
         const resize = () => {
             canvas.width = window.innerWidth;
@@ -40,6 +40,13 @@ export default function DotGrid() {
             const cols = Math.ceil(width / SPACING) + 1;
             const rows = Math.ceil(height / SPACING) + 1;
 
+            // Multiple ripple origins
+            const ripples = [
+                { x: width * 0.25, y: height * 0.5, offset: 0 },
+                { x: width * 0.75, y: height * 0.5, offset: 800 },
+                { x: width * 0.5, y: height * 0.3, offset: 400 },
+            ];
+
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     const x = c * SPACING;
@@ -48,16 +55,22 @@ export default function DotGrid() {
                     let glow = 0;
 
                     if (isMobile.current) {
-                        // Wave sweeping left to right
-                        const waveX = (timestamp * 0.04) % (width + GLOW_R * 2) - GLOW_R;
-                        const waveY = height / 2 + Math.sin(timestamp * 0.0008) * height * 0.3;
+                        // Pick the strongest ripple influence on this dot
+                        for (const ripple of ripples) {
+                            const dx = x - ripple.x;
+                            const dy = y - ripple.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
 
-                        const dx = x - waveX;
-                        const dy = y - waveY;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        glow = Math.max(0, 1 - dist / GLOW_R) * 0.7;
+                            // Ripple ring — expands outward over time
+                            const rippleRadius = ((timestamp + ripple.offset) * 0.08) % (Math.max(width, height));
+                            const ringWidth = 80;
+                            const distFromRing = Math.abs(dist - rippleRadius);
+                            const rippleGlow = Math.max(0, 1 - distFromRing / ringWidth) * 0.8;
+
+                            glow = Math.max(glow, rippleGlow);
+                        }
                     } else {
-                        // Mouse proximity
+                        // Mouse proximity — unchanged
                         const { x: mx, y: my } = mouse.current;
                         const dx = x - mx;
                         const dy = y - my;

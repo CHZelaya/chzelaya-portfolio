@@ -31,7 +31,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
             {/* Inner content */}
             <motion.div
-                className="relative z-10 w-[min(820px,88vw)]"
+                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-16"
                 variants={container}
                 initial="hidden"
                 animate={isActive ? 'visible' : 'hidden'}
@@ -51,16 +51,20 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                 </motion.h1>
 
                 {/* Tagline */}
-                <motion.p variants={item} className="mb-10 max-w-105 font-serif italic font-light text-2xl leading-relaxed text-(--color-text-mid)">
+                <motion.p variants={item} className="mb-10 max-w-105 font-serif italic font-light text-base sm:text-lg lg:text-2xl leading-relaxed text-(--color-text-mid)">
                     Every project here started with a real problem and a blank repo. Some shipped cleanly, some taught hard lessons. The case studies don&apos;t skip the hard parts.
                 </motion.p>
 
                 {/* Project grid */}
-                <motion.div variants={item} className="grid grid-cols-2 items-stretch overflow-hidden border border-(--color-border)">
+                <motion.div
+                    variants={item}
+                    className="flex flex-col gap-px sm:grid sm:grid-cols-2 border border-(--color-border)"
+                >
                     {featuredProjects?.map((project, i) => (
                         <div
                             key={project.slug?.current}
-                            className={i < featuredProjects.length - 1 ? "border-r border-(--color-border)" : ""}
+                            className="sm:not-last:border-r border-(--color-border)
+                       not-last:border-b sm:not-last:border-b-0"
                         >
                             <ProjectCard project={project} index={i} />
                         </div>
