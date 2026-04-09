@@ -42,7 +42,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
           @betonotfound
         </motion.p>
 
-        <motion.p variants={item} className="font-serif italic text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[28ch]">
+        <motion.p variants={item} className="font-serif italic text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
           {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
         </motion.p>
 
