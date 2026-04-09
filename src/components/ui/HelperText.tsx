@@ -8,7 +8,13 @@ import { useEffect, useState } from 'react';
 // draw-in), while panel-change remounts start almost immediately.
 let hasMountedOnce = false;
 
-export default function HelperText({ text }: { text: string }) {
+interface HelperTextProps {
+    text: string;
+    rotation?: number; // degrees, clockwise
+}
+
+
+export default function HelperText({ text, rotation = -8 }: HelperTextProps) {
     const [startDelay] = useState(() => hasMountedOnce ? 0.1 : 1.8);
 
     useEffect(() => {
@@ -16,14 +22,15 @@ export default function HelperText({ text }: { text: string }) {
     }, []);
 
     return (
-        <span className="font-hand text-sm text-white/80">
+        <span>
             {text.split('').map((char, i) => (
                 <motion.span
                     key={i}
+                    className='font-hand text-white/80 text-lg md:text-2xl'
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05, delay: startDelay + i * 0.04 }}
-                    style={{ display: 'inline-block', whiteSpace: 'pre' }}
+                    style={{ display: 'inline-block', whiteSpace: 'pre', transform: `rotate(${rotation}deg)` }}
                 >
                     {char}
                 </motion.span>

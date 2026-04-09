@@ -13,30 +13,39 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
     return (
         <Link href={href} className="group block h-full">
-            <article className="relative h-full overflow-hidden bg-(--color-bg-raise) p-5 transition-colors duration-300 hover:bg-(--color-bg-subtle)">
+            <article className="relative h-full overflow-hidden bg-(--color-bg-raise) p-6 lg:p-8 min-h-[45] lg:min-h-[60] transition-all duration-300 hover:bg-(--color-bg-subtle)">
 
                 {/* Top accent bar */}
                 <div
-                    className="absolute left-0 top-0 h-0.5 w-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="absolute left-0 top-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full"
                     style={{ background: "linear-gradient(90deg, var(--color-accent), transparent)" }}
                 />
 
                 {/* Number label */}
-                <span className="font-mono text-[0.5rem] font-light tracking-[0.2em] uppercase text-(--color-accent) opacity-50">
+                <span className="font-mono text-[0.65rem] font-light tracking-[0.2em] uppercase text-(--color-accent) opacity-50">
                     {num} / Case Study
                 </span>
 
                 {/* Title */}
-                <h3 className="mt-3 font-display text-xl leading-[0.9] tracking-[0.06em] text-(--color-text)">
+                <h3 className="mt-3 font-display text-2xl lg:text-3xl leading-[0.9] tracking-[0.06em] text-(--color-text) transition-colors duration-300 group-hover:text-white">
                     {title}
                 </h3>
 
                 {/* Summary */}
                 {summary && (
-                    <p className="mt-2 font-serif italic font-light text-[0.72rem] leading-relaxed text-(--color-text-mid) line-clamp-3">
+                    <p className="mt-3 font-serif italic font-light text-sm lg:text-base leading-relaxed text-(--color-text-mid)  transition-colors duration-300 group-hover:text-(--color-text)">
                         {summary}
                     </p>
                 )}
+
+                {/* Read more — appears on hover */}
+                <div className="mt-4 flex items-center gap-2 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent)">
+                        Read case study
+                    </span>
+                    <span className="text-(--color-accent) text-xs">→</span>
+                </div>
+
             </article>
         </Link>
     );

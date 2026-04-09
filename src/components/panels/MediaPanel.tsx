@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FEATURED_MEDIA_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
+import PhotoStack from '../ui/PhotoStack';
 
 interface MediaPanelProps {
     featuredMedia: FEATURED_MEDIA_QUERYResult;
@@ -82,11 +83,6 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                 style={{ background: "radial-gradient(circle, rgba(200,16,46,0.08) 0%, transparent 65%)" }}
             />
 
-            {/* Panel label */}
-            <span className="absolute left-8 top-8 font-mono text-[0.55rem] font-light tracking-[0.3em] uppercase text-(--color-text-dim)">
-                Photography
-            </span>
-
             {/* Inner content */}
             <motion.div
                 className="relative z-10 grid w-[min(860px,88vw)] grid-cols-2 items-center gap-[5vw]"
@@ -114,25 +110,15 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                 </motion.div>
 
                 {/* Right — photo mosaic */}
-                <motion.div
-                    variants={item}
-                    className="grid gap-1.25"
-                    style={{
-                        gridTemplateColumns: "1.2fr 1fr",
-                        gridTemplateRows: "1fr 1fr",
-                        height: "360px",
-                    }}
-                >
-                    <MosaicCell item={main} className="row-span-2" />
-                    <MosaicCell item={second} />
-                    <MosaicCell item={third} />
+                <motion.div variants={item} className="flex items-center justify-center">
+                    <PhotoStack photos={photos} />
                 </motion.div>
-            </motion.div>
 
-            {/* Panel number */}
-            <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text-dim)">
-                03
-            </span>
+                {/* Panel number */}
+                <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-texts)">
+                    03
+                </span>
+            </motion.div>
         </div>
     );
 }
