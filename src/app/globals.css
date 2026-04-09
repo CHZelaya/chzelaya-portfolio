@@ -8,8 +8,9 @@
 @theme {
   --font-display: var(--font-bebas);
   --font-mono: var(--font-jetbrains);
-  --font-serif: var(--font-cormorant);
+  --font-serif: var(--font-nunito);
   --font-hand: var(--font-caveat);
+
 }
 
 html, body {
@@ -32,8 +33,11 @@ html, body {
 
   /* Typography */
   --color-text: rgba(255, 255, 255, 0.88);
-  --color-text-mid: rgba(255, 255, 255, 0.38);
-  --color-text-dim: rgba(255, 255, 255, 0.14);
+  /* unchanged */
+  --color-text-mid: rgba(255, 255, 255, 0.65);
+  /* body copy, summaries, bio */
+  --color-text-dim: rgba(255, 255, 255, 0.38);
+  /* labels, hints, decorative */
 
   /* Borders */
   --color-border: rgba(255, 255, 255, 0.06);

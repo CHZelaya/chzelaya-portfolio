@@ -5,7 +5,7 @@ export default function ArrowRight() {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className='w-4 h-8 md:w-15 md:h-30'
+            className='w-6 h-12 sm:w-8 sm:h-16 md:w-8 md:h-16'
             viewBox="0 0 91 181"
             fill="none"
         >
