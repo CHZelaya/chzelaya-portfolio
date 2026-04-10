@@ -31,7 +31,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
             {/* Inner content */}
             <motion.div
-                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-16"
+                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-10 lg:py-16"
                 variants={container}
                 initial="hidden"
                 animate={isActive ? 'visible' : 'hidden'}
@@ -47,7 +47,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
                 {/* Headline */}
                 <motion.h1 variants={item} className="mb-4 font-display text-[clamp(2.8rem,5.5vw,5rem)] leading-[0.95] tracking-[0.04em] text-(--color-text)">
-                    Systems built<br />with intention.
+                    Keep Moving<br />Forward.
                 </motion.h1>
 
                 {/* Tagline */}
@@ -63,8 +63,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                     {featuredProjects?.map((project, i) => (
                         <div
                             key={project.slug?.current}
-                            className="sm:not-last:border-r border-(--color-border)
-                       not-last:border-b sm:not-last:border-b-0"
+                            className="sm:not-last:border-r border-(--color-border) not-last:border-b sm:not-last:border-b-0"
                         >
                             <ProjectCard project={project} index={i} />
                         </div>

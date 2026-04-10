@@ -40,7 +40,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         <motion.div variants={item} className="w-6 h-px bg-(--color-accent) mx-auto my-[1.4rem]" />
 
         <motion.p variants={item} className="font-mono text-bold text-[0.7rem] font-light tracking-[0.25em] text-(--color-accent) text-center">
-          Arrow Keys/Swipe to navigate
+          Software Developer & Photographer
         </motion.p>
 
         {/* Short Bio */}

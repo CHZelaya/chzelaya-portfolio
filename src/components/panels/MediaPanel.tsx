@@ -57,11 +57,11 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                         className="mb-6 font-mono text-[0.6rem] tracking-[0.3em] uppercase text-(--color-accent)"
                         style={{ opacity: 0.7 }}
                     >
-                        Photography &amp; Film
+                        Photography
                     </div>
 
                     <h1 className="mb-4 font-display text-[clamp(2.5rem,4.5vw,4.5rem)] leading-[0.95] tracking-[0.04em] text-(--color-text)">
-                        The quiet<br />frame.
+                        Time stops<br />here.
                     </h1>
 
                     <p className="max-w-[320px] font-serif italic font-light text-base sm:text-lg lg:text-2xl leading-relaxed text-(--color-text-mid)">
@@ -73,12 +73,11 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                 <motion.div variants={item} className="flex items-center justify-center">
                     <PhotoStack photos={photos} />
                 </motion.div>
-
-                {/* Panel number */}
-                <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
-                    03
-                </span>
             </motion.div>
+            {/* Panel number */}
+            <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
+                03
+            </span>
         </div>
     );
 }

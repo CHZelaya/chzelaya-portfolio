@@ -8,9 +8,7 @@ import DotGrid from "@/components/ui/DotGrid";
 import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
 import HelperText from '@/components/ui/HelperText';
-import Container from '@/components/ui/Container';
 
-const ZONES = ['Software Development', 'About', 'Photography'];
 const OFFSETS = ['0vw', '-100vw', '-200vw'];
 
 interface PageClientProps {
@@ -62,10 +60,6 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
 
       <DotGrid />
 
-      {/* Zone label — top center */}
-      <div className="pointer-events-none fixed left-1/2 top-7 z-50 -translate-x-1/2 font-mono text-[0.55rem] tracking-[0.25em] uppercase text-(--color-text)">
-        {ZONES[current]}
-      </div>
 
 
       {/* Horizontal stage */}
@@ -125,7 +119,6 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
           <button
             key={i}
             onClick={() => goTo(i)}
-            aria-label={ZONES[i]}
             className={`
               h-1.25 rounded-full transition-all duration-300
               ${i === current
