@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRef } from "react";
 import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
+import { PortableText } from "@portabletext/react";
+import DotGrid from "@/components/ui/DotGrid";
 
 
 //Sanity Image Builder
@@ -44,8 +46,10 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
     const images = project?.caseStudyImages?.images
 
 
+
     return (
         <div className="min-h-screen bg-(-color-bg)">
+            <DotGrid />
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center border-b border-(--color-border)">
                 <div className="w-full max-w-350 mx-auto px-6 py-16 md:px-8 md:py-20 lg:py-24">
@@ -96,12 +100,20 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                             <h2 className="text-[clamp(1.5rem,3vw,2rem)] tracking-tight font-display text-(--color-text)">The Problem</h2>
                         </div>
                         <div className="w-full max-w-180">
-                            <p className="text-[clamp(1.063rem,1.8vw,1.25rem)] text-(--color-text-mid) leading-[1.65] mb-4 md:mb-6 font-serif">
+                            <div className="text-[clamp(1.063rem,1.8vw,1.25rem)] text-(--color-text-mid) leading-[1.65] mb-4 md:mb-6 font-serif">
+                                {project?.caseStudyBody?.problem && (
+                                    <PortableText value={project?.caseStudyBody?.problem} />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </AnimatedSection>
 
-                            </p>
-                            <p className="text-[clamp(1.063rem,1.8vw,1.25rem)] text-(--color-text-mid) leading-[1.65] font-serif">
-                                Additional details about the problem space. All content here will be managed through Sanity CMS.
-                            </p>
+                {/* Constraints */}
+                <AnimatedSection delay={0.1}>
+                    <section className="mb-16 md:mb-24 lg:mb-32 grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[300px_1fr] lg:gap-12 border-b border-(--color-border) pb-16 md:pb-24 lg:pb-32">
+                        <div>
+                            <h2 className="text-[clamp(1.5rem,3vw,2rem)] tracking-tight font-display text-(--color-text)">Constraints</h2>
                         </div>
                     </section>
                 </AnimatedSection>
