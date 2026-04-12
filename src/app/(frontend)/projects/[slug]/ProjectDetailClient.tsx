@@ -16,7 +16,34 @@ export function urlFor(source: SanityImageSource) {
     return builder.image(source)
 }
 
-
+// PortableText Helper
+const portableTextComponents = {
+    block: {
+        normal: ({ children }: any) => (
+            <p className="mb-4 last:mb-0">{children}</p>
+        ),
+    },
+    list: {
+        bullet: ({ children }: any) => (
+            <ul className="mb-4 ml-4 space-y-2 list-disc marker:text-(--color-accent)">
+                {children}
+            </ul>
+        ),
+        number: ({ children }: any) => (
+            <ol className="mb-4 ml-4 space-y-2 list-decimal marker:text-(--color-accent)">
+                {children}
+            </ol>
+        ),
+    },
+    listItem: {
+        bullet: ({ children }: any) => (
+            <li className="pl-1">{children}</li>
+        ),
+        number: ({ children }: any) => (
+            <li className="pl-1">{children}</li>
+        ),
+    },
+}
 
 
 
@@ -37,7 +64,6 @@ function AnimatedSection({ children, delay = 0 }: { children: React.ReactNode; d
     )
 }
 
-
 interface ProjectDetailClientProps {
     project: PROJECT_BY_SLUG_QUERYResult;
 }
@@ -48,61 +74,71 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
 
 
     return (
-        <div className="min-h-screen bg-(-color-bg)">
+        <div className="min-h-screen bg-(--color-bg)">
             <DotGrid />
-            {/* Hero Section */}
-            <section className="relative min-h-[90vh] flex items-center border-b border-(--color-border)">
-                <div className="w-full max-w-350 mx-auto px-6 py-16 md:px-8 md:py-20 lg:py-24">
-                    <div className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+
+            {/* ── HERO ────────────────────────────────────────────── */}
+            <section className="relative min-h-[80vh] flex items-center border-b border-(--color-border)">
+                <div className="w-full max-w-350 mx-auto px-4 py-12 md:px-8 md:py-16 lg:py-24">
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+
+                        {/* Text block — always full width, sits above image on mobile */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
                         >
-                            <p className="text-(--color-text-dim) mb-4 md:mb-6 tracking-[0.2em] uppercase text-[11px] font-mono">
+                            <p className="text-(--color-text-dim) mb-3 md:mb-5 tracking-[0.2em] uppercase text-[10px] md:text-[11px] font-mono">
                                 Case Study
                             </p>
-                            <h1 className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-tight mb-6 md:mb-8 font-display text-(--color-text)">
+                            <h1 className="text-[clamp(2rem,8vw,5rem)] leading-[1.05] tracking-tight mb-4 md:mb-6 font-display text-(--color-text)">
                                 {project?.title}
                             </h1>
-                            <p className="text-[clamp(1.125rem,2vw,1.5rem)] text-(--color-text-mid) leading-[1.6] max-w-145 font-serif">
+                            <p className="text-[clamp(1rem,2.5vw,1.375rem)] text-(--color-text-mid) leading-[1.65] font-serif">
                                 {project?.summary}
                             </p>
                         </motion.div>
 
+                        {/* Cover image — full width on mobile, constrained on desktop */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-                            className="relative w-full aspect-4/3 overflow-hidden border border-(--color-border-mid)"
+                            className="relative w-full aspect-4/3 overflow-hidden"
                         >
-                            {/* Single Cover Image */}
                             {project?.coverImage && (
                                 <Image
-                                    src={urlFor(project?.coverImage).width(1200).height(675).url()}
-                                    alt=''
-                                    width={1200}
-                                    height={675}
+                                    src={urlFor(project.coverImage).url()}
+                                    alt=""
+                                    fill
+                                    className="object-contain"
+
                                 />
                             )}
                         </motion.div>
+
                     </div>
                 </div>
             </section>
 
-            {/* Main Content */}
-            <div className="w-full max-w-350 mx-auto px-6 py-12 md:px-8 md:py-16">
+
+
+            {/* ── CASE STUDY BODY ─────────────────────────────────── */}
+            <div className="w-full max-w-350 mx-auto px-4 py-8 md:px-8 md:py-12 lg:py-16">
+                {/* TODO: Refactor - Map over the case study body and render dynamically.  */}
 
                 {/* Problem */}
                 <AnimatedSection>
-                    <section className="mb-16 md:mb-24 lg:mb-32 grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[300px_1fr] lg:gap-12 border-b border-(--color-border) pb-16 md:pb-24 lg:pb-32">
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
                         <div>
-                            <h2 className="text-[clamp(1.5rem,3vw,2rem)] tracking-tight font-display text-(--color-text)">The Problem</h2>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                The Problem
+                            </h2>
                         </div>
-                        <div className="w-full max-w-180">
-                            <div className="text-[clamp(1.063rem,1.8vw,1.25rem)] text-(--color-text-mid) leading-[1.65] mb-4 md:mb-6 font-serif">
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
                                 {project?.caseStudyBody?.problem && (
-                                    <PortableText value={project?.caseStudyBody?.problem} />
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.problem} />
                                 )}
                             </div>
                         </div>
@@ -111,16 +147,92 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
 
                 {/* Constraints */}
                 <AnimatedSection delay={0.1}>
-                    <section className="mb-16 md:mb-24 lg:mb-32 grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[300px_1fr] lg:gap-12 border-b border-(--color-border) pb-16 md:pb-24 lg:pb-32">
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
                         <div>
-                            <h2 className="text-[clamp(1.5rem,3vw,2rem)] tracking-tight font-display text-(--color-text)">Constraints</h2>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                Constraints
+                            </h2>
+                        </div>
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
+                                {project?.caseStudyBody?.constraints && (
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.constraints} />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                {/* Approach */}
+                <AnimatedSection delay={0.1}>
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
+                        <div>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                The Approach
+                            </h2>
+                        </div>
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
+                                {project?.caseStudyBody?.approach && (
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.approach} />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                <AnimatedSection delay={0.1}>
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
+                        <div>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                The Execution
+                            </h2>
+                        </div>
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
+                                {project?.caseStudyBody?.execution && (
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.execution} />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                <AnimatedSection delay={0.1}>
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
+                        <div>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                The Outcome
+                            </h2>
+                        </div>
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
+                                {project?.caseStudyBody?.outcome && (
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.outcome} />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                <AnimatedSection delay={0.1}>
+                    <section className="mb-12 md:mb-20 lg:mb-28 grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-12 border-b border-(--color-border) pb-12 md:pb-20 lg:pb-28">
+                        <div>
+                            <h2 className="text-[clamp(1.25rem,3vw,1.75rem)] tracking-tight font-display text-(--color-text)">
+                                The Reflections
+                            </h2>
+                        </div>
+                        <div>
+                            <div className="text-[clamp(0.9375rem,1.8vw,1.125rem)] text-(--color-text-mid) leading-[1.7] font-serif">
+                                {project?.caseStudyBody?.reflection && (
+                                    <PortableText components={portableTextComponents} value={project.caseStudyBody.reflection} />
+                                )}
+                            </div>
                         </div>
                     </section>
                 </AnimatedSection>
 
             </div>
-
-
         </div>
     );
 }
