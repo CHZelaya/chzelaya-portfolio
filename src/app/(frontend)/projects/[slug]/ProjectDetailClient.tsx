@@ -5,8 +5,15 @@ import Image from "next/image";
 import { useRef } from "react";
 import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
-import { PortableText } from "@portabletext/react";
 import DotGrid from "@/components/ui/DotGrid";
+import {
+    type PortableTextComponentProps,
+    type PortableTextListComponent,
+    type PortableTextListItemComponent,
+    type PortableTextBlockComponent,
+    type PortableTextBlock,
+    PortableText
+} from "@portabletext/react"
 
 
 //Sanity Image Builder
@@ -19,29 +26,29 @@ export function urlFor(source: SanityImageSource) {
 // PortableText Helper
 const portableTextComponents = {
     block: {
-        normal: ({ children }: any) => (
+        normal: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
             <p className="mb-4 last:mb-0">{children}</p>
         ),
-    },
+    } satisfies Record<string, PortableTextBlockComponent>,
     list: {
-        bullet: ({ children }: any) => (
+        bullet: (({ children }) => (
             <ul className="mb-4 ml-4 space-y-2 list-disc marker:text-(--color-accent)">
                 {children}
             </ul>
-        ),
-        number: ({ children }: any) => (
+        )) satisfies PortableTextListComponent,
+        number: (({ children }) => (
             <ol className="mb-4 ml-4 space-y-2 list-decimal marker:text-(--color-accent)">
                 {children}
             </ol>
-        ),
+        )) satisfies PortableTextListComponent,
     },
     listItem: {
-        bullet: ({ children }: any) => (
+        bullet: (({ children }) => (
             <li className="pl-1">{children}</li>
-        ),
-        number: ({ children }: any) => (
+        )) satisfies PortableTextListItemComponent,
+        number: (({ children }) => (
             <li className="pl-1">{children}</li>
-        ),
+        )) satisfies PortableTextListItemComponent,
     },
 }
 
