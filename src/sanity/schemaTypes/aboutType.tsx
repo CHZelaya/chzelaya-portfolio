@@ -19,6 +19,7 @@ export const aboutType = defineType({
                 maxLength: 96,
             },
         }),
+        //TODO: Make this a portable rich text field for custom styling.
         defineField({
             name: 'shortBio',
             title: 'Short Bio',

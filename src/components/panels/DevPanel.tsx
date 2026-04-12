@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
 import ProjectCard from "@/components/cards/ProjectCard";
+import Link from 'next/dist/client/link';
 
 interface DevPanelProps {
     featuredProjects: FEATURED_PROJECTS_QUERYResult;
@@ -68,7 +69,17 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                             <ProjectCard project={project} index={i} />
                         </div>
                     ))}
+
                 </motion.div>
+
+                <div className="mt-6 flex justify-end transition-colors duration-200">
+                    <Link
+                        href="/projects"
+                        className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-text)  hover:text-(--color-accent) transition-colors duration-200"
+                    >
+                        Or view all projects →
+                    </Link>
+                </div>
             </motion.div>
 
             {/* Panel number */}

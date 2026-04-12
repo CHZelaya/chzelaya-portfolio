@@ -634,6 +634,166 @@ export type PROJECTS_QUERYResult = Array<{
   githubLink?: string;
   liveLink?: string;
 }>;
+// Variable: PROJECT_ALL_SLUGS_QUERY
+// Query: *[_type == "Project"]{ 'slug': slug.current }
+export type PROJECT_ALL_SLUGS_QUERYResult = Array<{
+  slug: string | null;
+}>;
+// Variable: PROJECT_BY_SLUG_QUERY
+// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon {            name,            title,            hotspot,        }    },    githubLink,    liveLink,}
+export type PROJECT_BY_SLUG_QUERYResult = {
+  title: string | null;
+  coverImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  year: number | null;
+  summary: string | null;
+  caseStudyBody: {
+    problem: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    constraints: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    approach: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    execution: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    outcome: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    reflection: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+  } | null;
+  caseStudyImages: {
+    images: Array<{
+      caption: string | null;
+      alt: string | null;
+      imageType: Array<"before/after" | "diagram" | "screenshot" | "ui"> | null;
+      asset: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      } | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    }> | null;
+  } | null;
+  technologies: Array<{
+    name: string | null;
+    category: Array<"Database" | "DevOps" | "Framework" | "Language" | "Library" | "Platform" | "Tool"> | null;
+    icon: {
+      name: null;
+      title: null;
+      hotspot: SanityImageHotspot | null;
+    } | null;
+  }> | null;
+  githubLink: string | null;
+  liveLink: string | null;
+} | null;
 // Variable: FEATURED_MEDIA_QUERY
 // Query: *[_type == "Media" && featured == true]
 export type FEATURED_MEDIA_QUERYResult = Array<{
@@ -730,6 +890,8 @@ declare module "@sanity/client" {
     "*[_type == \"about\" && _id == \"about\"][0]": ABOUT_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]": PROJECTS_QUERYResult;
+    "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
+    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon {\n            name,\n            title,\n            hotspot,\n        }\n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
     "*[_type == \"Media\"]": MEDIA_QUERYResult;
   }
