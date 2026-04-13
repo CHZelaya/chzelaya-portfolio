@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { ABOUT_QUERYResult } from "@/sanity/types";
 import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
-import HelperText from '@/components/ui/HelperText';
+import HandWrittenText from '@/components/ui/HandWrittenText';
 
 interface CenterPanelProps {
   about: ABOUT_QUERYResult;
@@ -59,12 +59,18 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
         <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 md:hidden">
           <button onClick={() => onGoTo(0)} className="flex flex-col-reverse items-center gap-2 cursor-pointer">
-            <HelperText key="mobile-left" text="What I build" />
+            <HandWrittenText
+              key="mobile-left"
+              text="What I build"
+            />
             <ArrowLeft />
 
           </button>
           <button onClick={() => onGoTo(2)} className="flex flex-col items-center gap-2 cursor-pointer">
-            <HelperText key="mobile-right" text="What I shoot" />
+            <HandWrittenText
+              key="mobile-right"
+              text="What I shoot"
+            />
             <ArrowRight />
           </button>
         </motion.div>

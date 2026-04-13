@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/app/lib/utils';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 
@@ -8,13 +9,14 @@ import { useEffect, useState } from 'react';
 // draw-in), while panel-change remounts start almost immediately.
 let hasMountedOnce = false;
 
-interface ScribbleTextProps {
+interface HandWrittenTextProps {
     text: string;
     rotation?: number; // degrees, clockwise
+    className?: string;
 }
 
 
-export default function ScribbleText({ text, rotation = -10 }: ScribbleTextProps) {
+export default function HandWrittenText({ text, rotation = -8, className }: HandWrittenTextProps) {
     const [startDelay] = useState(() => hasMountedOnce ? 0.1 : 1.8);
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export default function ScribbleText({ text, rotation = -10 }: ScribbleTextProps
             {text.split('').map((char, i) => (
                 <motion.span
                     key={i}
-                    className='grid font-hand text-white/80 text-base'
+                    className={cn('font-hand text-white/80 text-2xl', className)}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05, delay: startDelay + i * 0.04 }}

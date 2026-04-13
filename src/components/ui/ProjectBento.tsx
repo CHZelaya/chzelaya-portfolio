@@ -2,8 +2,8 @@ import Image from "next/image";
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { createImageUrlBuilder, SanityImageSource } from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
-import HelperText from "./HelperText";
-import ScribbleText from "./ScribbleText";
+import HandWrittenText from "./HandWrittenText";
+
 
 const builder = createImageUrlBuilder(client)
 
@@ -100,8 +100,9 @@ export default function ProjectBento({ technologies, year, status, scribbleNote 
                 </div>
                 {scribbleNote && (
                     <span className="block whitespace-nowrap font-hand text-sm tracking-[0.15em] text-(--color-text) mt-2">
-                        <ScribbleText
+                        <HandWrittenText
                             text={scribbleNote}
+                            className="text-base"
                         />
                     </span>
                 )}
