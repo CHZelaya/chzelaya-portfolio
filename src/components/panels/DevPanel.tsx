@@ -32,7 +32,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
             {/* Inner content */}
             <motion.div
-                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-10 lg:py-16"
+                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-10 lg:py-16 no-scrollbar"
                 variants={container}
                 initial="hidden"
                 animate={isActive ? 'visible' : 'hidden'}
