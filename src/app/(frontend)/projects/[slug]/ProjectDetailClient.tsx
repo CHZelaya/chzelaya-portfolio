@@ -16,6 +16,15 @@ import {
 } from "@portabletext/react"
 import ProjectBento from "@/components/ui/ProjectBento";
 
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/BreadCrumb"
+
 
 //Sanity Image Builder
 const builder = createImageUrlBuilder(client)
@@ -84,10 +93,26 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
     return (
         <div className="min-h-screen bg-(--color-bg)">
             <DotGrid />
-
             {/* ── HERO ────────────────────────────────────────────── */}
+
             <section className="relative min-h-[80vh] flex items-center border-b border-(--color-border)">
+
                 <div className="w-full max-w-350 mx-auto px-4 py-12 md:px-8 md:py-16 lg:py-24">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/projects">Dev Profile</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{project?.title}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
 
                         {/* Text block — always full width, sits above image on mobile */}

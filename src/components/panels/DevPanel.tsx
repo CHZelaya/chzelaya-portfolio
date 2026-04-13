@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
-import ProjectCard from "@/components/cards/ProjectCard";
+import FeaturedProjectCard from "@/components/cards/FeaturedProjectCard";
 import Link from 'next/dist/client/link';
 
 interface DevPanelProps {
@@ -86,7 +86,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                             key={project.slug?.current}
                             className="sm:not-last:border-r border-(--color-border) not-last:border-b sm:not-last:border-b-0"
                         >
-                            <ProjectCard project={project} index={i} />
+                            <FeaturedProjectCard project={project} index={i} />
                         </div>
                     ))}
 
