@@ -13,9 +13,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
     const num = String(index + 1).padStart(2, "0");
 
     return (
-        <Link href={href} className="group block h-full">
+        <Link href={href} className="group block">
             <motion.article
-                className="relative h-full overflow-hidden bg-(--color-bg-raise) p-6 lg:p-8 transition-all duration-300 hover:bg-(--color-bg-subtle)"
+                className="relative overflow-hidden bg-(--color-bg-raise) p-4 lg:p-5 transition-all duration-300 hover:bg-(--color-bg-subtle)"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}

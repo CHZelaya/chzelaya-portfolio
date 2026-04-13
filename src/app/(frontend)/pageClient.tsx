@@ -114,7 +114,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       </button>
 
       {/* Nav dots — bottom center */}
-      <div className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5">
+      <div className="fixed top-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5">
         {[0, 1, 2].map((i) => (
           <button
             key={i}
