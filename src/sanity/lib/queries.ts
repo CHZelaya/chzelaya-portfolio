@@ -21,6 +21,8 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
     coverImage,
     year,
     summary,
+    status, 
+    scribbleNote,
     caseStudyBody {
         problem,
         constraints,
@@ -42,11 +44,7 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
     technologies[]-> {
         name,
         category,
-        icon {
-            name,
-            title,
-            hotspot,
-        }
+        icon 
     },
     githubLink,
     liveLink,

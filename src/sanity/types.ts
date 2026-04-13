@@ -101,6 +101,8 @@ export type Project = {
   };
   summary?: string;
   year?: number;
+  status?: "live" | "frozen" | "in-progress" | "archived";
+  scribbleNote?: string;
   caseStudyBody?: {
     problem?: Array<{
       children?: Array<{
@@ -496,6 +498,8 @@ export type PROJECTS_QUERYResult = Array<{
   };
   summary?: string;
   year?: number;
+  status?: "archived" | "frozen" | "in-progress" | "live";
+  scribbleNote?: string;
   caseStudyBody?: {
     problem?: Array<{
       children?: Array<{
@@ -640,7 +644,7 @@ export type PROJECT_ALL_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: PROJECT_BY_SLUG_QUERY
-// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon {            name,            title,            hotspot,        }    },    githubLink,    liveLink,}
+// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    status,     scribbleNote,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon {            name,            title,            hotspot,        }    },    githubLink,    liveLink,}
 export type PROJECT_BY_SLUG_QUERYResult = {
   title: string | null;
   coverImage: {
@@ -657,6 +661,8 @@ export type PROJECT_BY_SLUG_QUERYResult = {
   } | null;
   year: number | null;
   summary: string | null;
+  status: "archived" | "frozen" | "in-progress" | "live" | null;
+  scribbleNote: string | null;
   caseStudyBody: {
     problem: Array<{
       children?: Array<{
@@ -891,7 +897,7 @@ declare module "@sanity/client" {
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
-    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon {\n            name,\n            title,\n            hotspot,\n        }\n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
+    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon {\n            name,\n            title,\n            hotspot,\n        }\n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
     "*[_type == \"Media\"]": MEDIA_QUERYResult;
   }

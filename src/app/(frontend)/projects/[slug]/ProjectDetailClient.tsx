@@ -14,6 +14,7 @@ import {
     type PortableTextBlock,
     PortableText
 } from "@portabletext/react"
+import ProjectBento from "@/components/ui/ProjectBento";
 
 
 //Sanity Image Builder
@@ -127,11 +128,23 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     </div>
                 </div>
             </section>
+            <section className="relative z-10 bg-(--color-bg) w-full max-w-350 mx-auto px-4 border border-(--color-border-mid) md:px-8 md:py-12">
+                <ProjectBento
+                    technologies={project?.technologies ?? null}
+                    year={project?.year ?? null}
+                    status={project?.status ?? null}
+                    scribbleNote={project?.scribbleNote ?? null}
+                />
+            </section>
+
+
 
 
 
             {/* ── CASE STUDY BODY ─────────────────────────────────── */}
-            <div className="w-full max-w-350 mx-auto px-4 py-8 md:px-8 md:py-12 lg:py-16">
+            <div className="relative z-10 bg-(--color-bg) w-full max-w-350 mx-auto px-4 py-8 border border-(--color-border-mid) md:px-8 md:py-12 lg:py-16">
+
+
                 {/* TODO: Refactor - Map over the case study body and render dynamically.  */}
 
                 {/* Problem */}
