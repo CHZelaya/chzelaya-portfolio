@@ -3,11 +3,8 @@
 import { useEffect, useRef } from 'react';
 
 const SPACING = 35;
-const DOT_R = 1;
-const GLOW_R = 110;
-
-// Each dot gets its own pulse state
-
+const DOT_RADIUS = 1;
+const GLOW_RADIUS = 110;
 
 export default function DotGrid() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -59,7 +56,7 @@ export default function DotGrid() {
                         const dx = x - mx;
                         const dy = y - my;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-                        glow = Math.max(0, 1 - dist / GLOW_R);
+                        glow = Math.max(0, 1 - dist / GLOW_RADIUS);
                     }
 
                     const rv = Math.round(200 * glow + 255 * (1 - glow));
@@ -68,7 +65,7 @@ export default function DotGrid() {
                     const alpha = 0.25 + glow * 0.3;
 
                     ctx.beginPath();
-                    ctx.arc(x, y, DOT_R + glow * 0.5, 0, Math.PI * 2);
+                    ctx.arc(x, y, DOT_RADIUS + glow * 0.5, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(${rv},${gv},${bv},${alpha})`;
                     ctx.fill();
                 }

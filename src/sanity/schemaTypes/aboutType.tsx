@@ -1,4 +1,7 @@
-import { defineType, defineField, defineArrayMember } from "sanity";
+import { defineType, defineField } from "sanity";
+
+//TODO: Create two singletons for DevProfile and PhotoProfile. DevProfile will contain specifics to myself and the dev paradigm while PhotoProfile will contain specificst to my photography paradigm. This way I can have a more flexible and extensible schema for the future, and also avoid having to update the about page every time I want to add a new field to the profile.
+
 
 export const aboutType = defineType({
     name: 'about',
@@ -19,11 +22,11 @@ export const aboutType = defineType({
                 maxLength: 96,
             },
         }),
-        //TODO: Make this a portable rich text field for custom styling.
         defineField({
             name: 'shortBio',
             title: 'Short Bio',
-            type: 'text',
+            type: 'array',
+            of: [{ type: 'block' }],
         }),
         defineField({
             name: 'photo',
