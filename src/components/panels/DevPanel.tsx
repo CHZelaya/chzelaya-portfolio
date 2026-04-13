@@ -32,7 +32,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
 
             {/* Inner content */}
             <motion.div
-                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-10 lg:py-16 no-scrollbar"
+                className="relative z-10 w-full max-w-205 px-4 sm:px-6 lg:px-0 overflow-y-auto max-h-screen py-16 lg:py-16 no-scrollbar"
                 variants={container}
                 initial="hidden"
                 animate={isActive ? 'visible' : 'hidden'}
@@ -56,6 +56,26 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                     Every project here started with a real problem and a blank repo. Some shipped cleanly, some taught hard lessons. The case studies don&apos;t skip the hard parts.
                 </motion.p>
 
+                {/* CTA band */}
+                <motion.div
+                    variants={item}
+                    className="my-8 -mx-4 sm:-mx-6 lg:mx-0 border-y border-(--color-border) px-4 sm:px-6 lg:px-0 py-4 flex items-center justify-between"
+                >
+                    <div className="flex items-center gap-5">
+                        <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-text-dim)">
+                            Featured Projects
+                        </span>
+                        <span className="h-px w-7 shrink-0 bg-(--color-border)" />
+                    </div>
+
+                    <Link
+                        href="/projects"
+                        className="flex items-center gap-2 border border-(--color-accent) px-3 py-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:bg-(--color-accent) hover:text-white transition-colors duration-200"
+                    >
+                        View Dev Profile →
+                    </Link>
+                </motion.div>
+
                 {/* Project grid */}
                 <motion.div
                     variants={item}
@@ -71,15 +91,6 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                     ))}
 
                 </motion.div>
-
-                <div className="mt-6 flex justify-end transition-colors duration-200">
-                    <Link
-                        href="/projects"
-                        className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-text)  hover:text-(--color-accent) transition-colors duration-200"
-                    >
-                        Or view all projects →
-                    </Link>
-                </div>
             </motion.div>
 
             {/* Panel number */}
