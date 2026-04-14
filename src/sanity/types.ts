@@ -13,51 +13,6 @@
  */
 
 // Source: schema.json
-export type Technology = {
-  _id: string;
-  _type: "Technology";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  category?: Array<"Language" | "Framework" | "Library" | "DevOps" | "Database" | "Platform" | "Tool">;
-  icon?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
-
 export type Media = {
   _id: string;
   _type: "Media";
@@ -99,6 +54,28 @@ export type Media = {
     year?: string;
     caption?: string;
   };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
 };
 
 export type Project = {
@@ -272,7 +249,79 @@ export type DevProfile = {
   _updatedAt: string;
   _rev: string;
   name?: string;
+  availability?: boolean;
+  availabilityNote?: string;
+  approachBody?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  currentProject?: {
+    name?: string;
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    stack?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "Technology";
+    };
+    status?: string;
+  };
+  annotation?: string;
+  buildingSince?: string;
+};
+
+export type Technology = {
+  _id: string;
+  _type: "Technology";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
   slug?: Slug;
+  category?: Array<"Language" | "Framework" | "Library" | "DevOps" | "Database" | "Platform" | "Tool">;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type About = {
@@ -432,20 +481,14 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Technology | SanityImageCrop | SanityImageHotspot | Slug | Media | Project | DevProfile | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Media | SanityImageCrop | SanityImageHotspot | Slug | Project | DevProfile | Technology | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ABOUT_QUERY
-// Query: *[_type == "about" && _id == "about"][0]
+// Query: *[_type == "about" && _id == "about"][0]{    name,    shortBio,    }
 export type ABOUT_QUERYResult = {
-  _id: "about";
-  _type: "about";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  shortBio?: Array<{
+  name: string | null;
+  shortBio: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -462,40 +505,7 @@ export type ABOUT_QUERYResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  photo?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  resumeFile?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
-    media?: unknown;
-    _type: "file";
-  };
-  socials?: {
-    github?: {
-      url?: string;
-    };
-    linkedin?: {
-      url?: string;
-    };
-    instagram?: {
-      url?: string;
-    };
-  };
+  }> | null;
 } | null;
 // Variable: FEATURED_PROJECTS_QUERY
 // Query: *[_type == "Project" && featured == true]{    title,    coverImage,    summary,    year,    slug,}
@@ -944,7 +954,7 @@ export type MEDIA_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"about\" && _id == \"about\"][0]": ABOUT_QUERYResult;
+    "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;

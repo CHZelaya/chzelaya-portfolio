@@ -1,7 +1,11 @@
 import { defineQuery } from "next-sanity";
 
 //* About Section Query
-export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]`);
+export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]{
+    name,
+    shortBio,
+    
+}`);
 
 //* Projects
 export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && featured == true]{

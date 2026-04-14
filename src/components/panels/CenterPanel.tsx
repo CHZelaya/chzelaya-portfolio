@@ -5,6 +5,8 @@ import { ABOUT_QUERYResult } from "@/sanity/types";
 import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
 import HandWrittenText from '@/components/ui/HandWrittenText';
+import { PortableText } from '@portabletext/react';
+import { portableTextComponents } from '@/app/lib/portableTextComponents';
 
 interface CenterPanelProps {
   about: ABOUT_QUERYResult;
@@ -44,9 +46,16 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         </motion.p>
 
         {/* Short Bio */}
-        <motion.p variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
-          {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
-        </motion.p>
+        <motion.div variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
+          {about?.shortBio && (
+            <PortableText value={about.shortBio}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-[clamp(1rem,2.5vw,1.125rem)]">{children}</p>,
+                },
+              }} />
+          )}
+        </motion.div>
 
         <motion.a
           variants={item}
@@ -80,6 +89,6 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
       <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
         02
       </span>
-    </div>
+    </div >
   );
 }
