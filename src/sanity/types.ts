@@ -269,36 +269,16 @@ export type DevProfile = {
     _type: "block";
     _key: string;
   }>;
-  currentProject?: {
-    name?: string;
-    description?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    stack?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "Technology";
-    };
-    status?: string;
-  };
-  annotation?: string;
+  showCurrentFocus?: boolean;
+  currentFocus?: string;
+  scribbleNote?: Array<string>;
   buildingSince?: string;
+  technologyStack?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "Technology";
+  };
 };
 
 export type Technology = {
@@ -507,6 +487,34 @@ export type ABOUT_QUERYResult = {
     _key: string;
   }> | null;
 } | null;
+// Variable: DEV_PROFILE_QUERY
+// Query: *[_type == "devProfile" && _id == "devProfile"][0]{    availability,    availabilityNote,    approachBody,    currentFocus,    showCurrentFocus,    scribbleNote,    technologyStack[]-> {        name,        category,        icon     },}
+export type DEV_PROFILE_QUERYResult = {
+  availability: boolean | null;
+  availabilityNote: string | null;
+  approachBody: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  currentFocus: string | null;
+  showCurrentFocus: boolean | null;
+  scribbleNote: Array<string> | null;
+  technologyStack: null;
+} | null;
 // Variable: FEATURED_PROJECTS_QUERY
 // Query: *[_type == "Project" && featured == true]{    title,    coverImage,    summary,    year,    slug,}
 export type FEATURED_PROJECTS_QUERYResult = Array<{
@@ -528,17 +536,10 @@ export type FEATURED_PROJECTS_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "Project"]
+// Query: *[_type == "Project"]{    title,    coverImage,    summary,    year,    slug,    status,    scribbleNote,    githubLink,    liveLink,}
 export type PROJECTS_QUERYResult = Array<{
-  _id: string;
-  _type: "Project";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  featured?: boolean;
-  coverImage?: {
+  title: string | null;
+  coverImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -549,148 +550,14 @@ export type PROJECTS_QUERYResult = Array<{
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  };
-  summary?: string;
-  year?: number;
-  status?: "archived" | "frozen" | "in-progress" | "live";
-  scribbleNote?: string;
-  caseStudyBody?: {
-    problem?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    constraints?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    approach?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    execution?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    outcome?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    reflection?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-  };
-  caseStudyImages?: {
-    images?: Array<{
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      caption?: string;
-      alt?: string;
-      imageType?: Array<"before/after" | "diagram" | "screenshot" | "ui">;
-      _type: "image";
-      _key: string;
-    }>;
-  };
-  technologies?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "Technology";
-  }>;
-  githubLink?: string;
-  liveLink?: string;
+  } | null;
+  summary: string | null;
+  year: number | null;
+  slug: Slug | null;
+  status: "archived" | "frozen" | "in-progress" | "live" | null;
+  scribbleNote: string | null;
+  githubLink: string | null;
+  liveLink: string | null;
 }>;
 // Variable: PROJECT_ALL_SLUGS_QUERY
 // Query: *[_type == "Project"]{ 'slug': slug.current }
@@ -955,8 +822,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
+    "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologyStack[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
-    "*[_type == \"Project\"]": PROJECTS_QUERYResult;
+    "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n}": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
     "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;

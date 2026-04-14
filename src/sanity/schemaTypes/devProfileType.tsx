@@ -30,43 +30,33 @@ export const devProfileType = defineType({
             of: [{ type: 'block' }],
         }),
         defineField({
-            name: 'currentProject',
-            title: 'Current Project',
-            type: 'object',
-            fields: [
-                defineField({
-                    name: 'name',
-                    title: 'Project Name',
-                    type: 'string',
-                }),
-                defineField({
-                    name: 'description',
-                    title: 'Project Description',
-                    type: 'array',
-                    of: [{ type: 'block' }],
-                }),
-                defineField({
-                    name: 'stack',
-                    title: 'Tech Stack',
-                    type: 'reference',
-                    to: [{ type: 'Technology' }],
-                }),
-                defineField({
-                    name: 'status',
-                    title: 'Project Status',
-                    type: 'string',
-                }),
-            ],
+            name: 'showCurrentFocus',
+            title: 'Show Current Focus?',
+            type: 'boolean',
+            initialValue: false,
         }),
         defineField({
-            name: 'annotation',
-            title: 'Annotation',
+            name: 'currentFocus',
+            title: 'Current Focus Note',
             type: 'string',
+            hidden: ({ parent }) => !parent?.showCurrentFocus,
+        }),
+        defineField({
+            name: 'scribbleNote',
+            title: 'Scribble Note',
+            type: 'array',
+            of: [{ type: 'string' }],
         }),
         defineField({
             name: 'buildingSince',
             title: 'Building Since',
             type: 'date',
+        }),
+        defineField({
+            name: 'technologyStack',
+            title: 'Technology Stack',
+            type: 'reference',
+            to: [{ type: 'Technology' }],
         })
 
     ]
