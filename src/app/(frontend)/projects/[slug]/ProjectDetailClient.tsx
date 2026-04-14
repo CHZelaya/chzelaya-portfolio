@@ -1,10 +1,9 @@
 'use client'
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { motion, useInView } from "motion/react";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { useRef } from "react";
-import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
 import DotGrid from "@/components/ui/DotGrid";
 import {
     type PortableTextComponentProps,
@@ -25,13 +24,6 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/BreadCrumb"
 
-
-//Sanity Image Builder
-const builder = createImageUrlBuilder(client)
-
-export function urlFor(source: SanityImageSource) {
-    return builder.image(source)
-}
 
 // PortableText Helper
 const portableTextComponents = {
