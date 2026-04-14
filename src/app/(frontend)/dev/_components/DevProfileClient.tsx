@@ -3,6 +3,7 @@ import { DEV_PROFILE_QUERYResult } from "@/sanity/types";
 import { Marquee } from "@/components/ui/Marquee";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { BentoCard, BentoLabel, SectionLabel } from "./BentoBoxes";
 
 interface DevProfileClientProps {
     projects: PROJECTS_QUERYResult;

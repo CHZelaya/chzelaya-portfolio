@@ -13,7 +13,7 @@ import {
     type PortableTextBlock,
     PortableText
 } from "@portabletext/react"
-import ProjectBento from "@/components/ui/ProjectBento";
+import ProjectBento from "./_components/ProjectBento";
 
 import {
     Breadcrumb,
@@ -97,7 +97,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href="/projects">Dev Profile</BreadcrumbLink>
+                                <BreadcrumbLink href="/dev">Dev Profile</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
