@@ -1,15 +1,10 @@
 import Image from "next/image";
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
-import { createImageUrlBuilder, SanityImageSource } from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
 import HandWrittenText from "./HandWrittenText";
+import { urlFor } from "@/sanity/lib/image";
 
 
-const builder = createImageUrlBuilder(client)
 
-export function urlFor(source: SanityImageSource) {
-    return builder.image(source)
-}
 
 type Project = NonNullable<PROJECT_BY_SLUG_QUERYResult>;
 

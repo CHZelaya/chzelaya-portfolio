@@ -7,6 +7,23 @@ export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]
     
 }`);
 
+//* Dev Profile Query
+export const DEV_PROFILE_QUERY = defineQuery(`*[_type == "devProfile" && _id == "devProfile"][0]{
+    availability,
+    availabilityNote,
+    approachBody,
+    currentFocus,
+    showCurrentFocus,
+    scribbleNote,
+    technologyStack[]-> {
+        name,
+        category,
+        icon 
+    },
+
+}`);
+
+
 //* Projects
 export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && featured == true]{
     title,
@@ -16,7 +33,17 @@ export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && feat
     slug,
 }`);
 
-export const PROJECTS_QUERY = defineQuery(`*[_type == "Project"]`);
+export const PROJECTS_QUERY = defineQuery(`*[_type == "Project"]{
+    title,
+    coverImage,
+    summary,
+    year,
+    slug,
+    status,
+    scribbleNote,
+    githubLink,
+    liveLink,
+}`);
 
 export const PROJECT_ALL_SLUGS_QUERY = defineQuery(`*[_type == "Project"]{ 'slug': slug.current }`);
 
