@@ -1,7 +1,11 @@
 import { defineQuery } from "next-sanity";
 
 //* About Section Query
-export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]`);
+export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]{
+    name,
+    shortBio,
+    
+}`);
 
 //* Projects
 export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && featured == true]{
@@ -21,6 +25,8 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
     coverImage,
     year,
     summary,
+    status, 
+    scribbleNote,
     caseStudyBody {
         problem,
         constraints,
@@ -42,11 +48,7 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
     technologies[]-> {
         name,
         category,
-        icon {
-            name,
-            title,
-            hotspot,
-        }
+        icon 
     },
     githubLink,
     liveLink,

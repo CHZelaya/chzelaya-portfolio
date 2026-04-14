@@ -1,10 +1,9 @@
 'use client'
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { motion, useInView } from "motion/react";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { useRef } from "react";
-import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
 import DotGrid from "@/components/ui/DotGrid";
 import {
     type PortableTextComponentProps,
@@ -14,14 +13,17 @@ import {
     type PortableTextBlock,
     PortableText
 } from "@portabletext/react"
+import ProjectBento from "@/components/ui/ProjectBento";
 
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/BreadCrumb"
 
-//Sanity Image Builder
-const builder = createImageUrlBuilder(client)
-
-export function urlFor(source: SanityImageSource) {
-    return builder.image(source)
-}
 
 // PortableText Helper
 const portableTextComponents = {
@@ -83,10 +85,26 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
     return (
         <div className="min-h-screen bg-(--color-bg)">
             <DotGrid />
-
             {/* ── HERO ────────────────────────────────────────────── */}
+
             <section className="relative min-h-[80vh] flex items-center border-b border-(--color-border)">
+
                 <div className="w-full max-w-350 mx-auto px-4 py-12 md:px-8 md:py-16 lg:py-24">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/projects">Dev Profile</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{project?.title}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
 
                         {/* Text block — always full width, sits above image on mobile */}
@@ -127,11 +145,23 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     </div>
                 </div>
             </section>
+            <section className="relative z-10 bg-(--color-bg) w-full max-w-350 mx-auto px-4 border border-(--color-border-mid) md:px-8 md:py-12">
+                <ProjectBento
+                    technologies={project?.technologies ?? null}
+                    year={project?.year ?? null}
+                    status={project?.status ?? null}
+                    scribbleNote={project?.scribbleNote ?? null}
+                />
+            </section>
+
+
 
 
 
             {/* ── CASE STUDY BODY ─────────────────────────────────── */}
-            <div className="w-full max-w-350 mx-auto px-4 py-8 md:px-8 md:py-12 lg:py-16">
+            <div className="relative z-10 bg-(--color-bg) w-full max-w-350 mx-auto px-4 py-8 border border-(--color-border-mid) md:px-8 md:py-12 lg:py-16">
+
+
                 {/* TODO: Refactor - Map over the case study body and render dynamically.  */}
 
                 {/* Problem */}

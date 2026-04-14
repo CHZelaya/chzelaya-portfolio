@@ -44,7 +44,25 @@ export const projectsType = defineType({
             title: 'Year',
             type: 'number',
         }),
-
+        defineField({
+            type: 'string',
+            name: 'status',
+            title: 'Status',
+            options: {
+                list: [
+                    { title: 'Live', value: 'live' },
+                    { title: 'Frozen', value: 'frozen' },
+                    { title: 'In Progress', value: 'in-progress' },
+                    { title: 'Archived', value: 'archived' },
+                ],
+            },
+        }),
+        defineField({
+            type: 'string',
+            name: 'scribbleNote',
+            title: 'Scribble Note',
+            description: 'The string that will be used to describe why the status is what it is.'
+        }),
         //Case Study Body
         defineField({
             name: 'caseStudyBody',

@@ -7,7 +7,7 @@ import { CenterPanel, DevPanel, MediaPanel } from "@/components/panels";
 import DotGrid from "@/components/ui/DotGrid";
 import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
-import HelperText from '@/components/ui/HelperText';
+import HandWrittenText from '@/components/ui/HandWrittenText';
 
 const OFFSETS = ['0vw', '-100vw', '-200vw'];
 
@@ -91,7 +91,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       <button onClick={() => goTo(current - 1)} aria-label="Previous panel" className={`hidden md:block fixed left-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 0 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
         <div className="flex flex-col-reverse items-center gap-3">
-          <HelperText
+          <HandWrittenText
             key={current === 2 ? 'media-left' : 'default-left'}
             text={current === 2 ? 'The full picture' : 'What I build'}
             rotation={-8}
@@ -105,7 +105,7 @@ export default function PageClient({ about, featuredProjects, featuredMedia }: P
       <button onClick={() => goTo(current + 1)} aria-label="Next panel" className={`hidden md:block fixed right-6 top-1/2 z-50 -translate-y-1/2 cursor-pointer transition-[opacity,transform] duration-300 ${current === 2 ? 'pointer-events-none opacity-0 scale-[0.8]' : 'opacity-100 scale-100'
         }`}>
         <div className="flex flex-col items-center gap-3">
-          <HelperText
+          <HandWrittenText
             key={current === 0 ? 'dev-right' : 'default-right'}
             text={current === 0 ? 'The person' : 'What I shoot'}
           />

@@ -4,7 +4,9 @@ import { motion } from 'motion/react';
 import { ABOUT_QUERYResult } from "@/sanity/types";
 import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
-import HelperText from '@/components/ui/HelperText';
+import HandWrittenText from '@/components/ui/HandWrittenText';
+import { PortableText } from '@portabletext/react';
+import { portableTextComponents } from '@/app/lib/portableTextComponents';
 
 interface CenterPanelProps {
   about: ABOUT_QUERYResult;
@@ -44,9 +46,16 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         </motion.p>
 
         {/* Short Bio */}
-        <motion.p variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
-          {about?.shortBio ?? 'Crafting digital experiences with code and creativity.'}
-        </motion.p>
+        <motion.div variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
+          {about?.shortBio && (
+            <PortableText value={about.shortBio}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-[clamp(1rem,2.5vw,1.125rem)]">{children}</p>,
+                },
+              }} />
+          )}
+        </motion.div>
 
         <motion.a
           variants={item}
@@ -59,12 +68,18 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
         <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 md:hidden">
           <button onClick={() => onGoTo(0)} className="flex flex-col-reverse items-center gap-2 cursor-pointer">
-            <HelperText key="mobile-left" text="What I build" />
+            <HandWrittenText
+              key="mobile-left"
+              text="What I build"
+            />
             <ArrowLeft />
 
           </button>
           <button onClick={() => onGoTo(2)} className="flex flex-col items-center gap-2 cursor-pointer">
-            <HelperText key="mobile-right" text="What I shoot" />
+            <HandWrittenText
+              key="mobile-right"
+              text="What I shoot"
+            />
             <ArrowRight />
           </button>
         </motion.div>
@@ -74,6 +89,6 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
       <span className="absolute bottom-8 right-8 font-mono text-[0.5rem] font-light tracking-widest text-(--color-text)">
         02
       </span>
-    </div>
+    </div >
   );
 }

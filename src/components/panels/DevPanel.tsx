@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { FEATURED_PROJECTS_QUERYResult } from "@/sanity/types";
-import ProjectCard from "@/components/cards/ProjectCard";
+import FeaturedProjectCard from "@/components/cards/FeaturedProjectCard";
 import Link from 'next/dist/client/link';
 
 interface DevPanelProps {
@@ -59,7 +59,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                 {/* CTA band */}
                 <motion.div
                     variants={item}
-                    className="my-8 -mx-4 sm:-mx-6 lg:mx-0 border-y border-(--color-border) px-4 sm:px-6 lg:px-0 py-4 flex items-center justify-between"
+                    className="my-8 -mx-4 sm:-mx-6 lg:mx-0 border-y border-(--color-border) px-4 sm:px-6 lg:px-0 py-4 flex items-center justify-evenly"
                 >
                     <div className="flex items-center gap-5">
                         <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-text-dim)">
@@ -86,7 +86,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                             key={project.slug?.current}
                             className="sm:not-last:border-r border-(--color-border) not-last:border-b sm:not-last:border-b-0"
                         >
-                            <ProjectCard project={project} index={i} />
+                            <FeaturedProjectCard project={project} index={i} />
                         </div>
                     ))}
 

@@ -7,7 +7,7 @@ type ProjectCardProps = {
     index: number;
 };
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function FeaturedProjectCard({ project, index }: ProjectCardProps) {
     const { title, summary, slug } = project;
     const href = `/projects/${slug?.current ?? "#"}`;
     const num = String(index + 1).padStart(2, "0");
