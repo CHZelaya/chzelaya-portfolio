@@ -15,7 +15,7 @@ export const DEV_PROFILE_QUERY = defineQuery(`*[_type == "devProfile" && _id == 
     currentFocus,
     showCurrentFocus,
     scribbleNote,
-    technologyStack[]-> {
+    technologies[]-> {
         name,
         category,
         icon 
@@ -43,6 +43,11 @@ export const PROJECTS_QUERY = defineQuery(`*[_type == "Project"]{
     scribbleNote,
     githubLink,
     liveLink,
+    technologies[]-> {
+        name,
+        category,
+        icon 
+    },
 }`);
 
 export const PROJECT_ALL_SLUGS_QUERY = defineQuery(`*[_type == "Project"]{ 'slug': slug.current }`);

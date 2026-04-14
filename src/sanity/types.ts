@@ -13,6 +13,51 @@
  */
 
 // Source: schema.json
+export type Technology = {
+  _id: string;
+  _type: "Technology";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  category?: Array<"Language" | "Framework" | "Library" | "DevOps" | "Database" | "Platform" | "Tool">;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
 export type Media = {
   _id: string;
   _type: "Media";
@@ -54,28 +99,6 @@ export type Media = {
     year?: string;
     caption?: string;
   };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
 };
 
 export type Project = {
@@ -273,35 +296,13 @@ export type DevProfile = {
   currentFocus?: string;
   scribbleNote?: Array<string>;
   buildingSince?: string;
-  technologyStack?: {
+  technologies?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
+    _key: string;
     [internalGroqTypeReferenceTo]?: "Technology";
-  };
-};
-
-export type Technology = {
-  _id: string;
-  _type: "Technology";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  category?: Array<"Language" | "Framework" | "Library" | "DevOps" | "Database" | "Platform" | "Tool">;
-  icon?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  }>;
 };
 
 export type About = {
@@ -461,7 +462,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Media | SanityImageCrop | SanityImageHotspot | Slug | Project | DevProfile | Technology | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Technology | SanityImageCrop | SanityImageHotspot | Slug | Media | Project | DevProfile | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ABOUT_QUERY
@@ -488,7 +489,7 @@ export type ABOUT_QUERYResult = {
   }> | null;
 } | null;
 // Variable: DEV_PROFILE_QUERY
-// Query: *[_type == "devProfile" && _id == "devProfile"][0]{    availability,    availabilityNote,    approachBody,    currentFocus,    showCurrentFocus,    scribbleNote,    technologyStack[]-> {        name,        category,        icon     },}
+// Query: *[_type == "devProfile" && _id == "devProfile"][0]{    availability,    availabilityNote,    approachBody,    currentFocus,    showCurrentFocus,    scribbleNote,    technologies[]-> {        name,        category,        icon     },}
 export type DEV_PROFILE_QUERYResult = {
   availability: boolean | null;
   availabilityNote: string | null;
@@ -513,7 +514,22 @@ export type DEV_PROFILE_QUERYResult = {
   currentFocus: string | null;
   showCurrentFocus: boolean | null;
   scribbleNote: Array<string> | null;
-  technologyStack: null;
+  technologies: Array<{
+    name: string | null;
+    category: Array<"Database" | "DevOps" | "Framework" | "Language" | "Library" | "Platform" | "Tool"> | null;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  }> | null;
 } | null;
 // Variable: FEATURED_PROJECTS_QUERY
 // Query: *[_type == "Project" && featured == true]{    title,    coverImage,    summary,    year,    slug,}
@@ -536,7 +552,7 @@ export type FEATURED_PROJECTS_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "Project"]{    title,    coverImage,    summary,    year,    slug,    status,    scribbleNote,    githubLink,    liveLink,}
+// Query: *[_type == "Project"]{    title,    coverImage,    summary,    year,    slug,    status,    scribbleNote,    githubLink,    liveLink,    technologies[]-> {        name,        category,        icon     },}
 export type PROJECTS_QUERYResult = Array<{
   title: string | null;
   coverImage: {
@@ -558,6 +574,22 @@ export type PROJECTS_QUERYResult = Array<{
   scribbleNote: string | null;
   githubLink: string | null;
   liveLink: string | null;
+  technologies: Array<{
+    name: string | null;
+    category: Array<"Database" | "DevOps" | "Framework" | "Language" | "Library" | "Platform" | "Tool"> | null;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  }> | null;
 }>;
 // Variable: PROJECT_ALL_SLUGS_QUERY
 // Query: *[_type == "Project"]{ 'slug': slug.current }
@@ -822,9 +854,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
-    "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologyStack[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
+    "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
-    "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n}": PROJECTS_QUERYResult;
+    "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
     "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;

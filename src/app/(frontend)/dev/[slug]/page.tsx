@@ -5,7 +5,7 @@ import { client } from "@/sanity/lib/client";
 import { PROJECT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { PROJECT_ALL_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
-import ProjectDetailClient from "./ProjectDetailClient";
+import ProjectDetailClient from "./CaseStudyClient";
 
 interface ProjectPageProps {
     params: Promise<{ slug: string }>

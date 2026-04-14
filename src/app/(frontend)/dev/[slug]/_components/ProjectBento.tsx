@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
-import HandWrittenText from "./HandWrittenText";
 import { urlFor } from "@/sanity/lib/image";
+import HandWrittenText from "@/components/ui/HandWrittenText";
 
 
 

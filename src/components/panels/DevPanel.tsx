@@ -69,7 +69,7 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                     </div>
 
                     <Link
-                        href="/projects"
+                        href="/dev"
                         className="flex items-center gap-2 border border-(--color-accent) px-3 py-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:bg-(--color-accent) hover:text-white transition-colors duration-200"
                     >
                         View Dev Profile →
@@ -81,12 +81,12 @@ export default function DevPanel({ featuredProjects, isActive }: DevPanelProps) 
                     variants={item}
                     className="flex flex-col gap-px sm:grid sm:grid-cols-2 border border-(--color-border)"
                 >
-                    {featuredProjects?.map((project, i) => (
+                    {featuredProjects?.map((dev, i) => (
                         <div
-                            key={project.slug?.current}
+                            key={dev.slug?.current}
                             className="sm:not-last:border-r border-(--color-border) not-last:border-b sm:not-last:border-b-0"
                         >
-                            <FeaturedProjectCard project={project} index={i} />
+                            <FeaturedProjectCard project={dev} index={i} />
                         </div>
                     ))}
 
