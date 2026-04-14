@@ -1,4 +1,3 @@
-//TODO: This will be the projects library page, with filters and all projects. DevPanel will become a "featured projects" section on the homepage.
 import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { DEV_PROFILE_QUERY } from "@/sanity/lib/queries";

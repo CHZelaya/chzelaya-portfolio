@@ -7,9 +7,11 @@ interface DevProfileClientProps {
 }
 
 export default function DevProfileClient({ devProfile, projects }: DevProfileClientProps) {
+    console.log("DevProfileClient", { devProfile, projects });
     return (
         <div>
             <h1>Dev Profile</h1>
+
         </div>
     );
 }

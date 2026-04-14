@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineArrayMember, defineType } from "sanity";
 import { defineField } from "sanity";
 
 export const devProfileType = defineType({
@@ -50,14 +50,18 @@ export const devProfileType = defineType({
         defineField({
             name: 'buildingSince',
             title: 'Building Since',
-            type: 'date',
+            type: 'string',
         }),
         defineField({
-            name: 'technologyStack',
-            title: 'Technology Stack',
-            type: 'reference',
-            to: [{ type: 'Technology' }],
-        })
+            name: 'technologies',
+            title: 'Technologies',
+            type: 'array',
+            of: [defineArrayMember({
+                type: 'reference',
+                to: [{ type: 'Technology' }],
+            })],
+            validation: (Rule) => Rule.unique().error('Technologies must be unique'), // Ensure uniqueness
+        }),
 
     ]
 });
