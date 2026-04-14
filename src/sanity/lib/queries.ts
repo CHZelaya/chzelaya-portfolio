@@ -23,6 +23,7 @@ export const DEV_PROFILE_QUERY = defineQuery(`*[_type == "devProfile" && _id == 
 
 }`);
 
+
 //* Projects
 export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "Project" && featured == true]{
     title,

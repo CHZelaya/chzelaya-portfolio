@@ -1,10 +1,12 @@
 import { PROJECTS_QUERYResult } from "@/sanity/types";
+import { DEV_PROFILE_QUERYResult } from "@/sanity/types";
 
 interface DevProfileClientProps {
-    data: PROJECTS_QUERYResult;
+    projects: PROJECTS_QUERYResult;
+    devProfile: DEV_PROFILE_QUERYResult;
 }
 
-export default function DevProfileClient({ data }: DevProfileClientProps) {
+export default function DevProfileClient({ devProfile, projects }: DevProfileClientProps) {
     return (
         <div>
             <h1>Dev Profile</h1>
