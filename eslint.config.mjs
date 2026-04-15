@@ -17,8 +17,10 @@ const eslintConfig = defineConfig([
     files: ['src/components/ui/**'],
     rules: {
       'react-compiler/react-compiler': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/exhaustive-deps': 'off',
     },
-  }
+  },
 ]);
 
 export default eslintConfig;
