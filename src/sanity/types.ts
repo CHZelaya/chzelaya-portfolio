@@ -261,8 +261,10 @@ export type Project = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "Technology";
   }>;
-  githubLink?: string;
+  githubLink1?: string;
+  githubLink2?: string;
   liveLink?: string;
+  estimatedReadingTime?: number;
 };
 
 export type DevProfile = {
@@ -572,7 +574,7 @@ export type PROJECTS_QUERYResult = Array<{
   slug: Slug | null;
   status: "archived" | "frozen" | "in-progress" | "live" | null;
   scribbleNote: string | null;
-  githubLink: string | null;
+  githubLink: null;
   liveLink: string | null;
   technologies: Array<{
     name: string | null;
@@ -597,7 +599,7 @@ export type PROJECT_ALL_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: PROJECT_BY_SLUG_QUERY
-// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    status,     scribbleNote,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon     },    githubLink,    liveLink,}
+// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    status,     scribbleNote,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon     },    githubLink1,    githubLink2,    liveLink,    estimatedReadingTime,}
 export type PROJECT_BY_SLUG_QUERYResult = {
   title: string | null;
   coverImage: {
@@ -757,8 +759,10 @@ export type PROJECT_BY_SLUG_QUERYResult = {
       _type: "image";
     } | null;
   }> | null;
-  githubLink: string | null;
+  githubLink1: string | null;
+  githubLink2: string | null;
   liveLink: string | null;
+  estimatedReadingTime: number | null;
 } | null;
 // Variable: FEATURED_MEDIA_QUERY
 // Query: *[_type == "Media" && featured == true]
@@ -858,7 +862,7 @@ declare module "@sanity/client" {
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
-    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink,\n    liveLink,\n}": PROJECT_BY_SLUG_QUERYResult;
+    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink1,\n    githubLink2,\n    liveLink,\n    estimatedReadingTime,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
     "*[_type == \"Media\"]": MEDIA_QUERYResult;
   }

@@ -82,8 +82,10 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
         category,
         icon 
     },
-    githubLink,
+    githubLink1,
+    githubLink2,
     liveLink,
+    estimatedReadingTime,
 }`)
 
 //* Media 

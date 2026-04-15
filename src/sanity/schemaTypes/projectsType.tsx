@@ -171,8 +171,13 @@ export const projectsType = defineType({
             })],
         }),
         defineField({
-            name: 'githubLink',
-            title: 'GitHub Link',
+            name: 'githubLink1',
+            title: 'GitHub Link 1',
+            type: 'url',
+        }),
+        defineField({
+            name: 'githubLink2',
+            title: 'GitHub Link 2',
             type: 'url',
         }),
         defineField({
@@ -180,5 +185,10 @@ export const projectsType = defineType({
             title: 'Live Link',
             type: 'url',
         }),
+        defineField({
+            name: 'estimatedReadingTime',
+            title: 'Estimated Reading Time (minutes)',
+            type: 'number',
+        })
     ],
 })
