@@ -1,4 +1,5 @@
 'use no memo';
+
 import * as React from "react"
 import { createMap } from "svg-dotted-map"
 
@@ -61,6 +62,8 @@ export function DottedMap<M extends Marker = Marker>({
   })
   const processedMarkers = addMarkers(markers)
 
+  const pointsKey = React.useMemo(() => JSON.stringify(points), [points]);
+
   // Compute stagger helpers in a single, simple pass
   const { xStep, yToRowIndex } = React.useMemo(() => {
     const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x)
@@ -84,7 +87,7 @@ export function DottedMap<M extends Marker = Marker>({
     }
 
     return { xStep: step || 1, yToRowIndex: rowMap }
-  }, [points])
+  }, [pointsKey])
 
   return (
     <svg
