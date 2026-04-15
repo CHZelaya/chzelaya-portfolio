@@ -1,3 +1,4 @@
+'use no memo';
 import * as React from "react"
 import { createMap } from "svg-dotted-map"
 
