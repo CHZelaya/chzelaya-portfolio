@@ -49,7 +49,7 @@ const statusConfig = {
 
 
 
-export default function ProjectBento({ technologies, year, status, scribbleNote, liveLink, githubLink1, githubLink2, readingTime }: ProjectBentoProps) {
+export default function ProjectBento({ technologies, year, status, scribbleNote, githubLink1, githubLink2, readingTime, liveLink }: ProjectBentoProps) {
     const config = status ? statusConfig[status as keyof typeof statusConfig] : statusConfig.archived;
 
     return (
