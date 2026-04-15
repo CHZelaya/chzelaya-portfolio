@@ -105,7 +105,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+                    <div className="grid grid-cols-1 py-8 gap-8 lg:grid-cols-2 lg:gap-16 items-center">
 
                         {/* Text block — always full width, sits above image on mobile */}
                         <motion.div
@@ -136,7 +136,9 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                                     src={urlFor(project.coverImage).url()}
                                     alt=""
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     className="object-contain"
+                                    loading="eager"
 
                                 />
                             )}
