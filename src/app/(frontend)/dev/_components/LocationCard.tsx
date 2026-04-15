@@ -1,6 +1,4 @@
 'use client';
-
-import React from "react"
 import { DottedMap, type Marker } from "@/components/ui/dotted-map"
 import { BentoCard } from "./BentoBoxes"
 import { DEV_PROFILE_QUERYResult } from "@/sanity/types";
