@@ -62,32 +62,29 @@ export function DottedMap<M extends Marker = Marker>({
   })
   const processedMarkers = addMarkers(markers)
 
-  const pointsKey = React.useMemo(() => JSON.stringify(points), [points]);
 
-  // Compute stagger helpers in a single, simple pass
-  const { xStep, yToRowIndex } = React.useMemo(() => {
-    const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x)
-    const rowMap = new Map<number, number>()
-    let step = 0
-    let prevY = Number.NaN
-    let prevXInRow = Number.NaN
 
-    for (const p of sorted) {
-      if (p.y !== prevY) {
-        // new row
-        prevY = p.y
-        prevXInRow = Number.NaN
-        if (!rowMap.has(p.y)) rowMap.set(p.y, rowMap.size)
-      }
-      if (!Number.isNaN(prevXInRow)) {
-        const delta = p.x - prevXInRow
-        if (delta > 0) step = step === 0 ? delta : Math.min(step, delta)
-      }
-      prevXInRow = p.x
+  const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x)
+  const rowMap = new Map<number, number>()
+  let step = 0
+  let prevY = Number.NaN
+  let prevXInRow = Number.NaN
+
+  for (const p of sorted) {
+    if (p.y !== prevY) {
+      prevY = p.y
+      prevXInRow = Number.NaN
+      if (!rowMap.has(p.y)) rowMap.set(p.y, rowMap.size)
     }
+    if (!Number.isNaN(prevXInRow)) {
+      const delta = p.x - prevXInRow
+      if (delta > 0) step = step === 0 ? delta : Math.min(step, delta)
+    }
+    prevXInRow = p.x
+  }
 
-    return { xStep: step || 1, yToRowIndex: rowMap }
-  }, [pointsKey])
+  const xStep = step || 1
+  const yToRowIndex = rowMap
 
   return (
     <svg
