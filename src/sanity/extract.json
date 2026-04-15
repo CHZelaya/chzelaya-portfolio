@@ -2017,7 +2017,14 @@
         },
         "optional": true
       },
-      "githubLink": {
+      "githubLink1": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "githubLink2": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -2028,6 +2035,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "estimatedReadingTime": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       }

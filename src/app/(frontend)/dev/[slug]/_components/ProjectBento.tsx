@@ -6,6 +6,7 @@ import HandWrittenText from "@/components/ui/HandWrittenText";
 
 
 
+
 type Project = NonNullable<PROJECT_BY_SLUG_QUERYResult>;
 
 interface ProjectBentoProps {
@@ -13,6 +14,10 @@ interface ProjectBentoProps {
     year: Project["year"];
     status: Project["status"];
     scribbleNote: Project["scribbleNote"];
+    githubLink1: Project["githubLink1"];
+    githubLink2: Project["githubLink2"];
+    liveLink: Project["liveLink"];
+    readingTime: Project["estimatedReadingTime"];
 }
 
 const statusConfig = {
@@ -42,7 +47,9 @@ const statusConfig = {
     },
 } as const;
 
-export default function ProjectBento({ technologies, year, status, scribbleNote }: ProjectBentoProps) {
+
+
+export default function ProjectBento({ technologies, year, status, scribbleNote, githubLink1, githubLink2, readingTime, liveLink }: ProjectBentoProps) {
     const config = status ? statusConfig[status as keyof typeof statusConfig] : statusConfig.archived;
 
     return (
@@ -73,6 +80,9 @@ export default function ProjectBento({ technologies, year, status, scribbleNote 
 
             {/* Year */}
             <div className="bg-(--color-bg) p-4 lg:p-5">
+                <div className="z-10">
+
+                </div>
                 <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-3">
                     Year
                 </span>
@@ -83,7 +93,6 @@ export default function ProjectBento({ technologies, year, status, scribbleNote 
                     Started
                 </span>
             </div>
-
             {/* Status */}
             <div className="bg-(--color-bg) p-4 lg:p-5">
                 <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-3">

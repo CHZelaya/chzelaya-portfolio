@@ -9,6 +9,11 @@ import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/BreadCrumb";
 import { LocationCard } from "./LocationCard";
+import {
+    AnimatedSpan,
+    Terminal,
+    TypingAnimation,
+} from "@/components/ui/terminal"
 
 
 interface DevProfileClientProps {
@@ -31,6 +36,20 @@ function AnimatedSection({ children, delay = 0 }: { children: React.ReactNode; d
             {children}
         </motion.div>
     )
+}
+
+function TerminalText() {
+    return (
+        <Terminal className="bg-(--color-bg-raise) border border-(--color-border) shadow-none h-full overflow-hidden">
+            <TypingAnimation>npx create-developer carlos</TypingAnimation>
+            <AnimatedSpan>No formal CS degree found.</AnimatedSpan>
+            <AnimatedSpan className="text-(--color-accent)">✔ Curiosity: installed</AnimatedSpan>
+            <AnimatedSpan className="text-(--color-accent)">✔ Coffee: poured</AnimatedSpan>
+            <AnimatedSpan className="text-(--color-accent)">✔ Real projects: confirmed</AnimatedSpan>
+            <AnimatedSpan className="text-(--color-accent)">✔ SAIT certified: 2025</AnimatedSpan>
+            <TypingAnimation>Unconventional. Works anyway.</TypingAnimation>
+        </Terminal>
+    );
 }
 
 
@@ -87,17 +106,8 @@ export default function DevProfileClient({ devProfile, projects }: DevProfileCli
                         <SectionLabel>At a glance</SectionLabel>
                         <div className="grid grid-cols-1 gap-2.25 md:grid-cols-2 lg:grid-cols-3">
 
-                            {/* Since card */}
-                            <BentoCard className="flex flex-col justify-end p-5 min-h-35">
-                                <div className="absolute top-0 left-0 w-0.5 h-[44%] bg-(--color-accent)" />
-                                <p className="font-display text-[3.5rem] font-bold leading-none text-(--color-text) tracking-tight relative z-10 mb-1">
-                                    2021
-                                </p>
-                                <p className="text-[9.5px] tracking-[0.2em] uppercase text-(--color-text-dim) flex items-center gap-2 font-mono relative z-10">
-                                    <span className="block w-3.5 h-px bg-(--color-accent) shrink-0" />
-                                    Learning/Building since
-                                </p>
-                            </BentoCard>
+                            {/* Terminal Animation */}
+                            <TerminalText />
 
                             {/* Approach + Stack */}
                             <ApproachStackCard
@@ -105,7 +115,7 @@ export default function DevProfileClient({ devProfile, projects }: DevProfileCli
                                 stack={devProfile?.technologies ?? undefined}
                             />
 
-                            {/* Availability */}
+                            {/* Availability + Location */}
                             <LocationCard devProfile={devProfile} />
 
                         </div>

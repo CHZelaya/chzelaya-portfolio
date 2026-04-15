@@ -152,8 +152,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     technologies={project?.technologies ?? null}
                     year={project?.year ?? null}
                     status={project?.status ?? null}
-                    scribbleNote={project?.scribbleNote ?? null}
-                />
+                    scribbleNote={project?.scribbleNote ?? null} githubLink1={null} githubLink2={null} liveLink={null} readingTime={null} />
             </section>
 
 
