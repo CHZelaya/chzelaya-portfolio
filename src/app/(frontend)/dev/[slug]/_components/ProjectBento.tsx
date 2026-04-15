@@ -61,7 +61,9 @@ export default function ProjectBento({ technologies, year, status, scribbleNote 
                                     src={urlFor(tech.icon).url()}
                                     alt={tech.name ?? ""}
                                     fill
+                                    sizes="(max-width: 768px) 20px, 32px"
                                     className="object-contain"
+                                    loading="eager"
                                 />
                             </div>
                         )
