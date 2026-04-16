@@ -8,7 +8,7 @@ export const timeLineEntryType = defineType({
         defineField({
             name: 'date',
             title: 'Date',
-            type: 'string',
+            type: 'date',
         }),
         defineField({
             name: 'title',
