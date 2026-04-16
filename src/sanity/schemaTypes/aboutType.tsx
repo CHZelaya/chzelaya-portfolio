@@ -7,6 +7,7 @@ export const aboutType = defineType({
     name: 'about',
     title: 'About',
     type: 'document',
+    icon: () => '🧑🏼‍🦱',
     fields: [
         defineField({
             name: 'name',
