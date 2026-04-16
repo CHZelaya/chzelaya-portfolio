@@ -4,6 +4,7 @@ export const technologyType = defineType({
     name: 'Technology',
     title: 'Technology',
     type: 'document',
+    icon: () => '🛠️',
     fields: [
         defineField({
             name: 'name',

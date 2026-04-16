@@ -5,6 +5,8 @@ import { projectsType } from './projectsType'
 import { mediaType } from './mediaType'
 import { aboutType } from './aboutType'
 import { devProfileType } from './devProfileType'
+import { timeLineDocumentType } from './timeLineDocumentType'
+import { timeLineEntryType } from './timeLineEntryType'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -13,6 +15,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     devProfileType,
     projectsType,
     mediaType,
-    technologyType
+    technologyType,
+    timeLineDocumentType,
+    timeLineEntryType
   ]
 }

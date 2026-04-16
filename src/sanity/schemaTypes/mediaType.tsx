@@ -4,6 +4,7 @@ export const mediaType = defineType({
     name: 'Media',
     title: 'Media',
     type: 'document',
+    icon: () => '🎬',
     fields: [
         defineField({
             name: 'title',

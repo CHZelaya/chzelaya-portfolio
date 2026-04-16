@@ -490,6 +490,9 @@ export type ABOUT_QUERYResult = {
     _key: string;
   }> | null;
 } | null;
+// Variable: TIMELINE_ENTRIES_QUERY
+// Query: *[_type == "timeLineDocument" && _id == "timeline"][0].entries[] | order(date asc){    date,     title,    description,    scribblenote,    }
+export type TIMELINE_ENTRIES_QUERYResult = null;
 // Variable: DEV_PROFILE_QUERY
 // Query: *[_type == "devProfile" && _id == "devProfile"][0]{    availability,    availabilityNote,    approachBody,    currentFocus,    showCurrentFocus,    scribbleNote,    technologies[]-> {        name,        category,        icon     },}
 export type DEV_PROFILE_QUERYResult = {
@@ -858,6 +861,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
+    "*[_type == \"timeLineDocument\" && _id == \"timeline\"][0].entries[] | order(date asc){\n    date, \n    title,\n    description,\n    scribblenote,\n\n    }\n": TIMELINE_ENTRIES_QUERYResult;
     "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;

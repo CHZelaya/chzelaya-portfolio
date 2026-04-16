@@ -5,6 +5,7 @@ export const devProfileType = defineType({
     name: 'devProfile',
     title: 'Dev Profile',
     type: 'document',
+    icon: () => '🧑🏼‍💻',
     fields: [
         defineField({
             name: 'name',

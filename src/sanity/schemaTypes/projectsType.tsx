@@ -4,6 +4,7 @@ export const projectsType = defineType({
     name: 'Project',
     title: 'Project',
     type: 'document',
+    icon: () => '📁',
     description: 'A project represents a case study of a software development project, including the problem, constraints, approach, execution, outcome, and reflection.',
     fields: [
         defineField({
