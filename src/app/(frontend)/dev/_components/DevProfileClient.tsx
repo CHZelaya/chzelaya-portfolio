@@ -1,7 +1,7 @@
 'use client';
 import { PROJECTS_QUERYResult } from "@/sanity/types";
 import { DEV_PROFILE_QUERYResult } from "@/sanity/types";
-import { BentoCard, SectionLabel } from "./BentoBoxes";
+import { SectionLabel } from "./BentoBoxes";
 import { ApproachStackCard } from "./ApproachStackCard";
 import { DevProjectCard } from "./DevProjectCard";
 import DotGrid from "@/components/ui/DotGrid";
@@ -60,9 +60,8 @@ export default function DevProfileClient({ devProfile, projects }: DevProfileCli
             <DotGrid />
 
 
-
+            {/* Opening */}
             <AnimatedSection>
-                {/* Opening */}
                 <section className=" px-4 py-12 md:px-8 md:py-16 lg:py-20">
                     <div className="max-w-255 mx-auto">
 
