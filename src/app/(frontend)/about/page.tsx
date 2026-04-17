@@ -1,5 +1,5 @@
 import { ABOUT_QUERY, TIMELINE_ENTRIES_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import AboutProfileClient from "./_components/AboutProfileClient";
 
 export default async function DevProfile() {

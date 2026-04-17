@@ -38,6 +38,8 @@ export const timeLineEntryType = defineType({
                     { title: 'Project', value: 'project' },
                     { title: 'Life Event Start', value: 'life-event-start' },
                     { title: 'Life Event End', value: 'life-event-end' },
+                    { title: 'Emergency Start', value: 'emergency-start' },
+                    { title: 'Emergency End', value: 'emergency-end' },
                 ]
             }
         })
@@ -46,12 +48,12 @@ export const timeLineEntryType = defineType({
         select: {
             date: 'date',
             description: 'description',
-
+            title: 'title',
         },
-        prepare({ description, date }) {
+        prepare({ title, date }) {
             return {
                 title: date,
-                subtitle: description,
+                subtitle: title,
             }
         }
     },
