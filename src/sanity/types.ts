@@ -354,6 +354,24 @@ export type About = {
     _type: "block";
     _key: string;
   }>;
+  longBio?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   photo?: {
     asset?: {
       _ref: string;
@@ -489,7 +507,7 @@ export type AllSanitySchemaTypes = TimeLineEntry | Timeline | Technology | Sanit
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ABOUT_QUERY
-// Query: *[_type == "about" && _id == "about"][0]{    name,    shortBio,    }
+// Query: *[_type == "about" && _id == "about"][0]{    name,    shortBio,    resumeFile,    socials {        github,        linkedin,        instagram    }    }
 export type ABOUT_QUERYResult = {
   name: string | null;
   shortBio: Array<{
@@ -510,6 +528,82 @@ export type ABOUT_QUERYResult = {
     _type: "block";
     _key: string;
   }> | null;
+  resumeFile: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  } | null;
+  socials: {
+    github: {
+      url?: string;
+    } | null;
+    linkedin: {
+      url?: string;
+    } | null;
+    instagram: {
+      url?: string;
+    } | null;
+  } | null;
+} | null;
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "about" && _id == "about"][0]{    longBio,    photo,    resumeFile,    socials {        github,        linkedin,        instagram    }}
+export type ABOUT_PAGE_QUERYResult = {
+  longBio: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  photo: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  resumeFile: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  } | null;
+  socials: {
+    github: {
+      url?: string;
+    } | null;
+    linkedin: {
+      url?: string;
+    } | null;
+    instagram: {
+      url?: string;
+    } | null;
+  } | null;
 } | null;
 // Variable: TIMELINE_ENTRIES_QUERY
 // Query: *[_type == "timeline"][0].entries[] | order(date asc){    date,     title,    description,    scribbleNote,    iconType,    }
@@ -887,7 +981,8 @@ export type MEDIA_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
+    "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    resumeFile,\n    socials {\n        github,\n        linkedin,\n        instagram\n    }\n    \n}": ABOUT_QUERYResult;
+    "*[_type == \"about\" && _id == \"about\"][0]{\n    longBio,\n    photo,\n    resumeFile,\n    socials {\n        github,\n        linkedin,\n        instagram\n    }\n}": ABOUT_PAGE_QUERYResult;
     "*[_type == \"timeline\"][0].entries[] | order(date asc){\n    date, \n    title,\n    description,\n    scribbleNote,\n    iconType,\n\n    }\n": TIMELINE_ENTRIES_QUERYResult;
     "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;

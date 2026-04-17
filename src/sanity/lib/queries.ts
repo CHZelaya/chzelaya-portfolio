@@ -4,8 +4,26 @@ import { defineQuery } from "next-sanity";
 export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]{
     name,
     shortBio,
+    resumeFile,
+    socials {
+        github,
+        linkedin,
+        instagram
+    }
     
 }`);
+
+export const ABOUT_PAGE_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]{
+    longBio,
+    photo,
+    resumeFile,
+    socials {
+        github,
+        linkedin,
+        instagram
+    }
+}`);
+
 
 export const TIMELINE_ENTRIES_QUERY = defineQuery(`*[_type == "timeline"][0].entries[] | order(date asc){
     date, 
