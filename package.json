@@ -17,6 +17,7 @@
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^4.22.0",
+    "@tabler/icons-react": "^3.41.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "countries-list": "^3.3.0",

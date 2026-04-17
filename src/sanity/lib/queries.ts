@@ -7,11 +7,12 @@ export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]
     
 }`);
 
-export const TIMELINE_ENTRIES_QUERY = defineQuery(`*[_type == "timeLineDocument" && _id == "timeline"][0].entries[] | order(date asc){
+export const TIMELINE_ENTRIES_QUERY = defineQuery(`*[_type == "timeline"][0].entries[] | order(date asc){
     date, 
     title,
     description,
-    scribblenote,
+    scribbleNote,
+    iconType,
 
     }
 `);

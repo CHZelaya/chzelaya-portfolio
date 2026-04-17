@@ -13,6 +13,27 @@
  */
 
 // Source: schema.json
+export type TimeLineEntry = {
+  _type: "timeLineEntry";
+  date?: string;
+  title?: string;
+  description?: string;
+  scribbleNote?: string;
+  iconType?: "work" | "formal-education-start" | "formal-education-end" | "self-directed-learning" | "project" | "life-event-start" | "life-event-end" | "emergency-start" | "emergency-end";
+};
+
+export type Timeline = {
+  _id: string;
+  _type: "timeline";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  entries?: Array<{
+    _key: string;
+  } & TimeLineEntry>;
+};
+
 export type Technology = {
   _id: string;
   _type: "Technology";
@@ -464,7 +485,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Technology | SanityImageCrop | SanityImageHotspot | Slug | Media | Project | DevProfile | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TimeLineEntry | Timeline | Technology | SanityImageCrop | SanityImageHotspot | Slug | Media | Project | DevProfile | About | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ABOUT_QUERY
@@ -491,8 +512,14 @@ export type ABOUT_QUERYResult = {
   }> | null;
 } | null;
 // Variable: TIMELINE_ENTRIES_QUERY
-// Query: *[_type == "timeLineDocument" && _id == "timeline"][0].entries[] | order(date asc){    date,     title,    description,    scribblenote,    }
-export type TIMELINE_ENTRIES_QUERYResult = null;
+// Query: *[_type == "timeline"][0].entries[] | order(date asc){    date,     title,    description,    scribbleNote,    iconType,    }
+export type TIMELINE_ENTRIES_QUERYResult = Array<{
+  date: string | null;
+  title: string | null;
+  description: string | null;
+  scribbleNote: string | null;
+  iconType: "emergency-end" | "emergency-start" | "formal-education-end" | "formal-education-start" | "life-event-end" | "life-event-start" | "project" | "self-directed-learning" | "work" | null;
+}> | null;
 // Variable: DEV_PROFILE_QUERY
 // Query: *[_type == "devProfile" && _id == "devProfile"][0]{    availability,    availabilityNote,    approachBody,    currentFocus,    showCurrentFocus,    scribbleNote,    technologies[]-> {        name,        category,        icon     },}
 export type DEV_PROFILE_QUERYResult = {
@@ -861,7 +888,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"about\" && _id == \"about\"][0]{\n    name,\n    shortBio,\n    \n}": ABOUT_QUERYResult;
-    "*[_type == \"timeLineDocument\" && _id == \"timeline\"][0].entries[] | order(date asc){\n    date, \n    title,\n    description,\n    scribblenote,\n\n    }\n": TIMELINE_ENTRIES_QUERYResult;
+    "*[_type == \"timeline\"][0].entries[] | order(date asc){\n    date, \n    title,\n    description,\n    scribbleNote,\n    iconType,\n\n    }\n": TIMELINE_ENTRIES_QUERYResult;
     "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;

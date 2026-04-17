@@ -24,18 +24,36 @@ export const timeLineEntryType = defineType({
             name: 'scribbleNote',
             title: 'Scribble Note',
             type: 'string',
+        }),
+        defineField({
+            name: 'iconType',
+            title: 'Icon Type',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Work/Career', value: 'work' },
+                    { title: 'Formal Education Start', value: 'formal-education-start' },
+                    { title: 'Formal Education End', value: 'formal-education-end' },
+                    { title: 'Self-Directed Learning', value: 'self-directed-learning' },
+                    { title: 'Project', value: 'project' },
+                    { title: 'Life Event Start', value: 'life-event-start' },
+                    { title: 'Life Event End', value: 'life-event-end' },
+                    { title: 'Emergency Start', value: 'emergency-start' },
+                    { title: 'Emergency End', value: 'emergency-end' },
+                ]
+            }
         })
     ],
     preview: {
         select: {
             date: 'date',
             description: 'description',
-
+            title: 'title',
         },
-        prepare({ description, date }) {
+        prepare({ title, date }) {
             return {
                 title: date,
-                subtitle: description,
+                subtitle: title,
             }
         }
     },

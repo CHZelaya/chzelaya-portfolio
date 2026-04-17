@@ -6,7 +6,7 @@ import ArrowLeft from '@/components/ui/ArrowLeft';
 import ArrowRight from '@/components/ui/ArrowRight';
 import HandWrittenText from '@/components/ui/HandWrittenText';
 import { PortableText } from '@portabletext/react';
-import { portableTextComponents } from '@/app/lib/portableTextComponents';
+import Link from 'next/link';
 
 interface CenterPanelProps {
   about: ABOUT_QUERYResult;
@@ -57,13 +57,12 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
           )}
         </motion.div>
 
-        <motion.a
+        <motion.div
           variants={item}
-          href="#"
           className="mt-[2.4rem] font-mono text-[0.55rem] font-normal tracking-[0.2em] uppercase text-(--color-text-dim) border border-(--color-border) px-[1.2rem] py-[0.6rem] transition-colors duration-200 hover:text-(--color-text) hover:border-(--color-accent) hover:bg-(--color-accent-dim)"
         >
-          Enter ↗
-        </motion.a>
+          <Link href="/about">Enter ↗</Link>
+        </motion.div>
 
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
         <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 md:hidden">
