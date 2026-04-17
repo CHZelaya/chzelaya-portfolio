@@ -28,6 +28,14 @@ export const aboutType = defineType({
             title: 'Short Bio',
             type: 'array',
             of: [defineArrayMember({ type: 'block' })],
+            description: 'This is the short bio that will be displayed on the homepage and other sections of the site. It should be a brief introduction to who I am and what I do.',
+        }),
+        defineField({
+            name: 'longBio',
+            title: 'Long Bio',
+            type: 'array',
+            of: [defineArrayMember({ type: 'block' })],
+            description: 'This is the more detailed bio that can include rich text formatting. It will be used in the about page to provide a more in-depth introduction.',
         }),
         defineField({
             name: 'photo',
@@ -36,11 +44,14 @@ export const aboutType = defineType({
             options: {
                 hotspot: true,
             },
+            description: 'This is the photo that will be displayed on the about page.',
+
         }),
         defineField({
             name: 'resumeFile',
             title: 'Resume File',
             type: 'file',
+            description: 'This is the resume file that will be downloadable on the about page.',
         }),
         defineField({
             name: 'socials',

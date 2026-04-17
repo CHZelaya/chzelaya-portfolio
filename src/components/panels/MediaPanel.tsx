@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FEATURED_MEDIA_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import PhotoStack from '../ui/PhotoStack';
+import HandWrittenText from '../ui/HandWrittenText';
 
 interface MediaPanelProps {
     featuredMedia: FEATURED_MEDIA_QUERYResult;
@@ -67,7 +68,15 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                     <p className="max-w-[320px] font-serif italic font-light text-base sm:text-lg lg:text-2xl leading-relaxed text-(--color-text-mid)">
                         Before the code there was the camera. Weddings, families, pets, landscapes around Calgary. I stepped back from client work to focus on software, but the eye for a good frame never really switches off.
                     </p>
+
+                    <HandWrittenText
+                        text="Curated gallery in the works!"
+                    /> <br></br>
+                    <HandWrittenText className='text-(--color-accent)'
+                        text="Check back soon."
+                    />
                 </motion.div>
+
 
                 {/* Right — photo stack */}
                 <motion.div variants={item} className="flex items-center justify-center">

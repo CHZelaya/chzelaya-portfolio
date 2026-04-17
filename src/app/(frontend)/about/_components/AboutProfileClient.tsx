@@ -1,9 +1,10 @@
 'use client';
-import { ABOUT_QUERYResult, TIMELINE_ENTRIES_QUERYResult } from "@/sanity/types";
+import { ABOUT_PAGE_QUERYResult, TIMELINE_ENTRIES_QUERYResult } from "@/sanity/types";
 import DotGrid from "@/components/ui/DotGrid";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/BreadCrumb";
 import { PortableText } from "next-sanity";
+import Image from "next/image";
 import {
     useScroll,
     useTransform,
@@ -11,11 +12,16 @@ import {
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import HandWrittenText from "@/components/ui/HandWrittenText";
+import { urlFor } from "@/sanity/lib/image";
+import { BentoCard } from "../../dev/_components/BentoBoxes";
+import Link from "next/link";
+import { IconBrandInstagram, IconBrandLinkedin, IconBrandGithub } from '@tabler/icons-react';
+
 
 
 
 interface AboutProfileClientProps {
-    about: ABOUT_QUERYResult;
+    about: ABOUT_PAGE_QUERYResult;
     timeline: TIMELINE_ENTRIES_QUERYResult;
 }
 
@@ -41,14 +47,12 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
     const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
 
-
-
     return (
-        <div className="min-h-screen bg-(--color-bg) text-(--color-text) font-mono font-light">
+        <div className="min-h-screen relative bg-(--color-bg) text-(--color-text) font-mono font-light">
             <DotGrid />
             {/* Bio Section */}
             <AnimatedSection>
-                <section className=" px-4 py-12 md:px-8 md:py-16 lg:py-20">
+                <section className="relative px-4 py-12 md:px-8 md:py-16 lg:py-20">
                     <div className="max-w-255 mx-auto">
                         <Breadcrumb>
                             <BreadcrumbList>
@@ -63,8 +67,7 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                             </BreadcrumbList>
                         </Breadcrumb>
                         <br></br>
-
-                        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                        <div className="flex flex-col pt-10 gap-5 md:flex-row md:items-start md:justify-between">
                             <div>
                                 <p className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-(--color-accent) mb-5 font-mono after:content-[''] after:flex-1 after:h-px after:bg-(--color-accent-border)">
                                     About
@@ -73,14 +76,75 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                                     The Longer<br />Answer.
                                 </h1>
                             </div>
-                            <div className="text-[13px] md:text-[15px] lg:text-[16px] text-(--color-text-mid) leading-[1.7] max-w-100 md:pb-1">
-                                No bootcamp. No CS degree. I got here through curiosity, stubbornness, and a habit of not moving on until something actually makes sense.
+                            <div className="text-[13px] md:text-[13px] lg:text-[16px] text-(--color-text-mid) leading-[1.7] max-w-100 md:pb-1">
+                                {about?.longBio && <PortableText value={about.longBio} />}
                                 <br></br>
-                                <HandWrittenText text='...not to mention alot of coffee' className="text-[15px] md:text-[20px] font-bold text-(--color-accent)" />
+                                <HandWrittenText text='...f/8 and ship it.' className="text-[15px] md:text-[20px] font-bold text-(--color-accent)" />
                             </div>
                         </div>
                     </div>
                 </section>
+
+                {/* Bento Grid */}
+                <div className="max-w-255 mx-auto px-4 md:px-8 py-8">
+                    <div className="grid grid-cols-[1fr_120px] gap-2.25"
+                        style={{ gridTemplateRows: 'repeat(3, 120px)' }}>
+
+                        {/* Portrait */}
+                        <BentoCard className="row-span-3 p-0 overflow-hidden relative">
+                            {about?.photo && (
+                                <Image
+                                    src={urlFor(about.photo).url()}
+                                    alt=""
+                                    fill
+                                    className="object-contain grayscale hover:grayscale-25 transition-all"
+                                    priority
+                                />
+                            )}
+                        </BentoCard>
+
+                        {/* GitHub */}
+                        <BentoCard className="flex items-center justify-center p-4">
+                            {about?.socials?.github?.url && (
+                                <Link href={about?.socials?.github?.url} target="_blank" rel="noopener noreferrer"
+                                    className="text-[11px] font-mono text-(--color-text-dim) hover:text-(--color-text) transition-colors">
+                                    <IconBrandGithub className="inline-block mr-1 size-10 md:size-12" />
+                                </Link>
+                            )}
+                        </BentoCard>
+
+                        {/* LinkedIn */}
+                        <BentoCard className="flex items-center justify-center p-4">
+                            {about?.socials?.linkedin?.url && (
+                                <Link href={about?.socials?.linkedin?.url} target="_blank" rel="noopener noreferrer"
+                                    className="text-(--color-text-dim) hover:text-(--color-dim) transition-colors">
+                                    <IconBrandLinkedin className="inline-block mr-1 size-10 md:size-12" />
+                                </Link>
+                            )}
+                        </BentoCard>
+
+                        {/* Instagram */}
+                        <BentoCard className="flex items-center justify-center p-4">
+                            {about?.socials?.instagram?.url && (
+                                <Link href={about?.socials?.instagram?.url} target="_blank" rel="noopener noreferrer"
+                                    className="text-[11px] font-mono text-(--color-text-dim) hover:text-(--color-text) transition-colors">
+                                    <IconBrandInstagram className="inline-block mr-1 size-10 md:size-12" />
+                                </Link>
+                            )}
+                        </BentoCard>
+
+                    </div>
+                </div>
+
+
+                <div className="max-w-255 mx-auto px-4 md:px-8 pb-2">
+                    <p className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-(--color-accent) mb-5 font-mono after:content-[''] after:flex-1 after:h-px after:bg-(--color-accent-border)">
+
+                    </p>
+                    <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[0.92] tracking-tight text-(--color-text)">
+                        The Path Here.
+                    </h2>
+                </div>
 
 
 
@@ -89,12 +153,15 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                     className="min-h-screen bg-(--color-bg) text-(--color-text) font-mono font-light"
                     ref={containerRef}
                 >
-                    <div ref={ref} className="relative max-w-255 mx-auto pb-20">
+
+                    <div ref={ref} className="relative max-w-255 mx-auto py-10">
                         {timeline && timeline.map((item, index) => (
+
                             <div
                                 key={index}
-                                className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-12 pt-10 md:pt-40 relative"
+                                className={`grid md:grid-cols-[200px_1fr] gap-8 md:gap-12 relative ${index === 0 ? 'pt-4' : 'pt-10 md:pt-16'}`}
                             >
+
                                 <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
                                     <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-(--color-bg-subtle) dark:bg-black flex items-center justify-center">
                                         <div className="h-4 w-4 rounded-full bg-(--color-accent) dark:bg-neutral-800 border border-(--color-accent) dark:border-neutral-700 p-2" />
@@ -152,6 +219,7 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                 </div>
             </AnimatedSection>
         </div>
+
 
     )
 }

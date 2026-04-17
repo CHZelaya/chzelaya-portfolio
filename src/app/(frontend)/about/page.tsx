@@ -1,10 +1,10 @@
-import { ABOUT_QUERY, TIMELINE_ENTRIES_QUERY } from "@/sanity/lib/queries";
+import { ABOUT_PAGE_QUERY, TIMELINE_ENTRIES_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 import AboutProfileClient from "./_components/AboutProfileClient";
 
 export default async function DevProfile() {
     const [{ data: about }, { data: timeline }] = await Promise.all([
-        sanityFetch({ query: ABOUT_QUERY }),
+        sanityFetch({ query: ABOUT_PAGE_QUERY }),
         sanityFetch({ query: TIMELINE_ENTRIES_QUERY }),
     ]);
 

@@ -34,19 +34,21 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         initial="hidden"
         animate={isActive ? 'visible' : 'hidden'}
       >
-        <motion.h1 variants={item} className="font-display text-[clamp(3rem,5vw,5rem)] text-(--color-text) tracking-[0.06em] leading-[0.9] text-center">
-          {about?.name?.split(' ').join('\n') ?? 'Carlos\nBeto'}
-        </motion.h1>
 
-        {/* Thin Red Seperator */}
-        <motion.div variants={item} className="w-6 h-px bg-(--color-accent) mx-auto my-[1.4rem]" />
 
         <motion.p variants={item} className="font-mono text-bold text-[0.7rem] font-light tracking-[0.25em] text-(--color-accent) text-center">
           Software Developer & Photographer
         </motion.p>
 
+        {/* Thin Red Seperator */}
+        <motion.div variants={item} className="w-6 h-px bg-(--color-accent) mx-auto my-[1.4rem]" />
+
+        <motion.h1 variants={item} className="font-display pt-5 text-[clamp(3rem,5vw,5rem)] text-(--color-text) tracking-[0.06em] leading-[0.9] text-center">
+          {about?.name?.split(' ').join('\n') ?? 'Carlos\nBeto'}
+        </motion.h1>
+
         {/* Short Bio */}
-        <motion.div variants={item} className="font-serif text-[clamp(1rem,3vw,1.5rem)] font-light text-(--color-text-mid) text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
+        <motion.div variants={item} className="font-serif font-light text-(--color-text-mid) text-base sm:text-lg lg:text-2xl text-center mt-[1.8rem] tracking-[0.04em] leading-relaxed max-w-[42ch] lg:max-w-[52ch]">
           {about?.shortBio && (
             <PortableText value={about.shortBio}
               components={{
@@ -57,11 +59,24 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
           )}
         </motion.div>
 
+        {/* CTA band */}
         <motion.div
           variants={item}
-          className="mt-[2.4rem] font-mono text-[0.55rem] font-normal tracking-[0.2em] uppercase text-(--color-text-dim) border border-(--color-border) px-[1.2rem] py-[0.6rem] transition-colors duration-200 hover:text-(--color-text) hover:border-(--color-accent) hover:bg-(--color-accent-dim)"
+          className="my-8 -mx-4 sm:-mx-6 lg:mx-0 border-y border-(--color-border) px-4 sm:px-6 lg:px-0 py-4 flex items-center justify-evenly"
         >
-          <Link href="/about">Enter ↗</Link>
+          <div className="flex items-center gap-5">
+            <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-text-dim)">
+              {`There is a longer answer →`}
+            </span>
+            <span className="h-px w-7 shrink-0 bg-(--color-border)" />
+          </div>
+
+          <Link
+            href="/about"
+            className="flex items-center gap-2 border border-(--color-accent) px-3 py-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:bg-(--color-accent) hover:text-white transition-colors duration-200"
+          >
+            View About Profile
+          </Link>
         </motion.div>
 
         {/* Mobile navigation arrows — in flow, hidden on desktop */}
