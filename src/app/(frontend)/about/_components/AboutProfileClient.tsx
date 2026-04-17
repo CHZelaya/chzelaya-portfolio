@@ -57,7 +57,7 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
                                 <BreadcrumbItem>
-                                    <BreadcrumbPage>{'About Me'}
+                                    <BreadcrumbPage>{'Carlos Alberto'}
                                     </BreadcrumbPage>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
@@ -74,7 +74,9 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                                 </h1>
                             </div>
                             <div className="text-[13px] md:text-[15px] lg:text-[16px] text-(--color-text-mid) leading-[1.7] max-w-100 md:pb-1">
-                                {about?.shortBio && <PortableText value={about.shortBio} />}
+                                No bootcamp. No CS degree. I got here through curiosity, stubbornness, and a habit of not moving on until something actually makes sense.
+                                <br></br>
+                                <HandWrittenText text='...not to mention alot of coffee' className="text-[15px] md:text-[20px] font-bold text-(--color-accent)" />
                             </div>
                         </div>
                     </div>
@@ -117,13 +119,12 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                                         })}
                                     </h3>
                                     <h4 className="text-base md:text-lg font-semibold mb-2 text-(--color-text) dark:text-neutral-300">
-                                        <div className="flex flex-row justify-items items-center gap-8">
+                                        <div className="flex flex-col gap-2">
                                             {item.title}
-                                            <span className="hidden md:inline-block">
-                                                <HandWrittenText className="text-base md:text-lg text-(--color-accent) font-light" text={item.scribbleNote || ""} />
+                                            <HandWrittenText className="text-[15px] md:text-[25px] lg:text-[16px] text-(--color-accent) font-bold" text={item.scribbleNote || ""} />
 
 
-                                            </span>
+
                                         </div>
                                     </h4>
 
