@@ -83,6 +83,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
         <motion.div variants={item} className="flex justify-between items-center w-full mt-10 px-2 md:hidden">
           <button onClick={() => onGoTo(0)} className="flex flex-col-reverse items-center gap-2 cursor-pointer">
             <HandWrittenText
+              className='md:text-2xl text-lg lg:text-3xl'
               key="mobile-left"
               text="What I build"
             />
@@ -91,6 +92,7 @@ export default function CenterPanel({ about, isActive, onGoTo }: CenterPanelProp
           </button>
           <button onClick={() => onGoTo(2)} className="flex flex-col items-center gap-2 cursor-pointer">
             <HandWrittenText
+              className='md:text-2xl text-lg lg:text-3xl'
               key="mobile-right"
               text="What I shoot"
             />

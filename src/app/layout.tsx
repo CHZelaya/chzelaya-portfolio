@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat, Nunito, Inter } from "next/font/google";
+import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat, Nunito, Inter, Reenie_Beanie, Architects_Daughter, Patrick_Hand, Gochi_Hand } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const bebas = Bebas_Neue({
   weight: "400",
@@ -41,9 +41,14 @@ const nunito = Nunito({
   display: "swap",
 });
 
+
+
+
+
+
 export const metadata: Metadata = {
-  title: "betonotfound.dev",
-  description: "Developer & photographer.",
+  title: "betonotfound",
+  description: "Developer & Photographer.",
 };
 
 export default function RootLayout({
