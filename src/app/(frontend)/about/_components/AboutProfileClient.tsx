@@ -79,7 +79,7 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                             <div className="text-[13px] md:text-[13px] lg:text-[16px] text-(--color-text-mid) leading-[1.7] max-w-100 md:pb-1">
                                 {about?.longBio && <PortableText value={about.longBio} />}
                                 <br></br>
-                                <HandWrittenText text='...f/8 and ship it.' className="text-[15px] md:text-[20px] font-bold text-(--color-accent)" />
+                                <HandWrittenText text='...f/8 and ship it.' className="text-[20px] md:text-[25px]  text-(--color-accent) font-bold" />
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@ export default function AboutProfileClient({ about, timeline }: AboutProfileClie
                                     <h4 className="text-base md:text-lg font-semibold mb-2 text-(--color-text) dark:text-neutral-300">
                                         <div className="flex flex-col gap-2">
                                             {item.title}
-                                            <HandWrittenText className="text-[15px] md:text-[25px] lg:text-[16px] text-(--color-accent) font-bold" text={item.scribbleNote || ""} />
+                                            <HandWrittenText className="text-[20px] md:text-[25px]  text-(--color-accent) font-bold" text={item.scribbleNote || ""} />
 
 
 

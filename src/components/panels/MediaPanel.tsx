@@ -70,9 +70,10 @@ export default function MediaPanel({ featuredMedia, isActive }: MediaPanelProps)
                     </p>
 
                     <HandWrittenText
+                        className='md:text-2xl text-lg lg:text-3xl'
                         text="Curated gallery in the works!"
                     /> <br></br>
-                    <HandWrittenText className='text-(--color-accent)'
+                    <HandWrittenText className='md:text-2xl text-lg lg:text-3xl text-(--color-accent)'
                         text="Check back soon."
                     />
                 </motion.div>

@@ -16,7 +16,7 @@ interface HandWrittenTextProps {
 }
 
 
-export default function HandWrittenText({ text, rotation = -8, className }: HandWrittenTextProps) {
+export default function HandWrittenText({ text, rotation = 0, className }: HandWrittenTextProps) {
     const [startDelay] = useState(() => hasMountedOnce ? 0.1 : 1.8);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function HandWrittenText({ text, rotation = -8, className }: Hand
             {text.split('').map((char, i) => (
                 <motion.span
                     key={i}
-                    className={cn('font-hand text-white/80 text-2xl', className)}
+                    className={cn('font-hand text-white/80 text-3xl', className)}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.05, delay: startDelay + i * 0.04 }}
