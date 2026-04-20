@@ -2,6 +2,10 @@ import Image from "next/image";
 import { PROJECT_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import HandWrittenText from "@/components/ui/HandWrittenText";
+import Link from 'next/link';
+
+
+
 
 
 
@@ -78,21 +82,31 @@ export default function ProjectBento({ technologies, year, status, scribbleNote,
                 </div>
             </div>
 
-            {/* Year */}
-            <div className="bg-(--color-bg) p-4 lg:p-5">
-                <div className="z-10">
-
-                </div>
-                <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-3">
-                    Year
-                </span>
-                <span className="font-mono text-xl font-light text-(--color-text)">
-                    {year}
-                </span>
-                <span className="block font-mono text-[0.55rem] tracking-[0.2em] uppercase text-(--color-text-dim) mt-1">
-                    Started
-                </span>
-            </div>
+{/* Year + Live Link */}
+<div className="bg-(--color-bg) p-4 lg:p-5 flex flex-col justify-between">
+    <div>
+        <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-3">
+            Year
+        </span>
+        <span className="font-mono text-xl font-light text-(--color-text)">
+            {year}
+        </span>
+        <span className="block font-mono text-[0.55rem] tracking-[0.2em] uppercase text-(--color-text-dim) mt-1">
+            Started
+        </span>
+    </div>
+    {liveLink && (
+        <div className="mt-4 pt-3 border-t border-(--color-border)">
+            <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-2">
+                Live Link
+            </span>
+            <Link href={liveLink} target="_blank" rel="noopener noreferrer"
+                  className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:underline">
+                Visit →
+            </Link>
+        </div>
+    )}
+</div>
             {/* Status */}
             <div className="bg-(--color-bg) p-4 lg:p-5">
                 <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-3">
