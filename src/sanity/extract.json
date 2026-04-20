@@ -904,7 +904,7 @@
         },
         "optional": true
       },
-      "wip": {
+      "workInProgress": {
         "type": "objectAttribute",
         "value": {
           "type": "boolean"
