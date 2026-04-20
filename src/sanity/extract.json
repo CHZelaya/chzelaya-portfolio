@@ -904,6 +904,13 @@
         },
         "optional": true
       },
+      "wip": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "scribbleNote": {
         "type": "objectAttribute",
         "value": {

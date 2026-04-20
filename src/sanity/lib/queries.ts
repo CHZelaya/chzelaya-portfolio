@@ -69,6 +69,7 @@ export const PROJECTS_QUERY = defineQuery(`*[_type == "Project"]{
     year,
     slug,
     status,
+    wip,
     scribbleNote,
     githubLink,
     liveLink,
@@ -87,6 +88,7 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[_type == "Project" && slug.c
     year,
     summary,
     status, 
+    wip,
     scribbleNote,
     caseStudyBody {
         problem,

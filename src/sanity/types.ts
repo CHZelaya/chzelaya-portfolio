@@ -146,6 +146,7 @@ export type Project = {
   summary?: string;
   year?: number;
   status?: "live" | "frozen" | "in-progress" | "archived";
+  wip?: boolean;
   scribbleNote?: string;
   caseStudyBody?: {
     problem?: Array<{
@@ -678,7 +679,7 @@ export type FEATURED_PROJECTS_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "Project"]{    title,    coverImage,    summary,    year,    slug,    status,    scribbleNote,    githubLink,    liveLink,    technologies[]-> {        name,        category,        icon     },}
+// Query: *[_type == "Project"]{    title,    coverImage,    summary,    year,    slug,    status,    wip,    scribbleNote,    githubLink,    liveLink,    technologies[]-> {        name,        category,        icon     },}
 export type PROJECTS_QUERYResult = Array<{
   title: string | null;
   coverImage: {
@@ -697,6 +698,7 @@ export type PROJECTS_QUERYResult = Array<{
   year: number | null;
   slug: Slug | null;
   status: "archived" | "frozen" | "in-progress" | "live" | null;
+  wip: boolean | null;
   scribbleNote: string | null;
   githubLink: null;
   liveLink: string | null;
@@ -723,7 +725,7 @@ export type PROJECT_ALL_SLUGS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: PROJECT_BY_SLUG_QUERY
-// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    status,     scribbleNote,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon     },    githubLink1,    githubLink2,    liveLink,    estimatedReadingTime,}
+// Query: *[_type == "Project" && slug.current == $slug][0]{    title,    coverImage,    year,    summary,    status,     wip,    scribbleNote,    caseStudyBody {        problem,        constraints,        approach,        execution,        outcome,        reflection,    },    caseStudyImages {        images[] {            caption,            alt,            imageType,            asset,            hotspot,            crop        }    },    technologies[]-> {        name,        category,        icon     },    githubLink1,    githubLink2,    liveLink,    estimatedReadingTime,}
 export type PROJECT_BY_SLUG_QUERYResult = {
   title: string | null;
   coverImage: {
@@ -741,6 +743,7 @@ export type PROJECT_BY_SLUG_QUERYResult = {
   year: number | null;
   summary: string | null;
   status: "archived" | "frozen" | "in-progress" | "live" | null;
+  wip: boolean | null;
   scribbleNote: string | null;
   caseStudyBody: {
     problem: Array<{
@@ -986,9 +989,9 @@ declare module "@sanity/client" {
     "*[_type == \"timeline\"][0].entries[] | order(date asc){\n    date, \n    title,\n    description,\n    scribbleNote,\n    iconType,\n\n    }\n": TIMELINE_ENTRIES_QUERYResult;
     "*[_type == \"devProfile\" && _id == \"devProfile\"][0]{\n    availability,\n    availabilityNote,\n    approachBody,\n    currentFocus,\n    showCurrentFocus,\n    scribbleNote,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n\n}": DEV_PROFILE_QUERYResult;
     "*[_type == \"Project\" && featured == true]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n}": FEATURED_PROJECTS_QUERYResult;
-    "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;
+    "*[_type == \"Project\"]{\n    title,\n    coverImage,\n    summary,\n    year,\n    slug,\n    status,\n    wip,\n    scribbleNote,\n    githubLink,\n    liveLink,\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n}": PROJECTS_QUERYResult;
     "*[_type == \"Project\"]{ 'slug': slug.current }": PROJECT_ALL_SLUGS_QUERYResult;
-    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink1,\n    githubLink2,\n    liveLink,\n    estimatedReadingTime,\n}": PROJECT_BY_SLUG_QUERYResult;
+    "*[_type == \"Project\" && slug.current == $slug][0]{\n    title,\n    coverImage,\n    year,\n    summary,\n    status, \n    wip,\n    scribbleNote,\n    caseStudyBody {\n        problem,\n        constraints,\n        approach,\n        execution,\n        outcome,\n        reflection,\n    },\n    caseStudyImages {\n        images[] {\n            caption,\n            alt,\n            imageType,\n            asset,\n            hotspot,\n            crop\n        }\n    },\n    technologies[]-> {\n        name,\n        category,\n        icon \n    },\n    githubLink1,\n    githubLink2,\n    liveLink,\n    estimatedReadingTime,\n}": PROJECT_BY_SLUG_QUERYResult;
     "*[_type == \"Media\" && featured == true]": FEATURED_MEDIA_QUERYResult;
     "*[_type == \"Media\"]": MEDIA_QUERYResult;
   }
