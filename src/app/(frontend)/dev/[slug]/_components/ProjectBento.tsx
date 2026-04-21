@@ -14,7 +14,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/AlertDialog"
-import { Button } from "@/components/ui/Button";
+
 
 type Project = NonNullable<PROJECT_BY_SLUG_QUERYResult>;
 
@@ -81,7 +81,7 @@ const WipDialog = ({ liveLink }: dialogProps) => {
                 <AlertDialogHeader>
                     <AlertDialogTitle className="text-(--color-text) font-display">Heads up</AlertDialogTitle>
                     <AlertDialogDescription className="text-(--color-text-mid) font-mono text-sm">
-                        This one's still in progress. You might run into rough edges, placeholder content, or features that aren't quite there yet. That's intentional, it's a live build, not a finished product.
+                        This one&apos;s still in progress. You might run into rough edges, placeholder content, or features that aren&apos;t quite there yet. That&apos;s intentional, it&apos;s a live build, not a finished product.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
