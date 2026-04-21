@@ -61,11 +61,12 @@ const statusConfig = {
     },
 } as const;
 
-const linkRef = useRef<HTMLAnchorElement>(null);
+
 
 // WIP Dialog component.
 const WipDialog = ({ liveLink }: dialogProps) => {
     if (!liveLink) return null;
+    const linkRef = useRef<HTMLAnchorElement>(null);
 
     return (
         <div>
