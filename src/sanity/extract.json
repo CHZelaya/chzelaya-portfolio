@@ -904,13 +904,6 @@
         },
         "optional": true
       },
-      "workInProgress": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
       "scribbleNote": {
         "type": "objectAttribute",
         "value": {

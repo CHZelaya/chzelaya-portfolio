@@ -59,12 +59,6 @@ export const projectsType = defineType({
             },
         }),
         defineField({
-            name: 'workInProgress',
-            title: 'Work in Progress?',
-            type: 'boolean',
-            initialValue: false,
-        }),
-        defineField({
             type: 'string',
             name: 'scribbleNote',
             title: 'Scribble Note',

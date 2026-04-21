@@ -23,7 +23,6 @@ interface ProjectBentoProps {
     year: Project["year"];
     status: Project["status"];
     scribbleNote: Project["scribbleNote"];
-    workInProgress: Project["workInProgress"];
     githubLink1: Project["githubLink1"];
     githubLink2: Project["githubLink2"];
     liveLink: Project["liveLink"];
@@ -103,7 +102,7 @@ const WipDialog = ({ liveLink }: dialogProps) => {
 
 
 
-export default function ProjectBento({ technologies, year, status, scribbleNote, githubLink1, githubLink2, readingTime, liveLink, workInProgress }: ProjectBentoProps) {
+export default function ProjectBento({ technologies, year, status, scribbleNote, githubLink1, githubLink2, readingTime, liveLink }: ProjectBentoProps) {
     const config = status ? statusConfig[status as keyof typeof statusConfig] : statusConfig.archived;
     console.log("Status:", status);
 
