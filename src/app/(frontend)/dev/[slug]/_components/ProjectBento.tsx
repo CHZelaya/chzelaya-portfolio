@@ -97,7 +97,7 @@ const WipDialog = ({ liveLink }: dialogProps) => {
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
-    )
+    );
 }
 
 

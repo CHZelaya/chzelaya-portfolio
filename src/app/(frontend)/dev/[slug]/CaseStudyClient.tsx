@@ -79,6 +79,9 @@ interface ProjectDetailClientProps {
 
 export default function ProjectDetailClient({ project }: ProjectDetailClientProps) {
     const images = project?.caseStudyImages?.images
+    if (!project) {
+        return null;
+    };
 
 
 
@@ -152,7 +155,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     technologies={project?.technologies ?? null}
                     year={project?.year ?? null}
                     status={project?.status ?? null}
-                    scribbleNote={project?.scribbleNote ?? null} githubLink1={null} githubLink2={null} liveLink={project.liveLink ?? null} readingTime={null} />
+                    scribbleNote={project?.scribbleNote ?? null} githubLink1={null} githubLink2={null} liveLink={project?.liveLink ?? null} readingTime={null} />
             </section>
 
 
