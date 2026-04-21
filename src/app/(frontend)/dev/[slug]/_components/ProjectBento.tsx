@@ -14,6 +14,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/AlertDialog"
+import { useRef } from "react";
 
 
 type Project = NonNullable<PROJECT_BY_SLUG_QUERYResult>;
@@ -60,43 +61,47 @@ const statusConfig = {
     },
 } as const;
 
+const linkRef = useRef<HTMLAnchorElement>(null);
 
 // WIP Dialog component.
 const WipDialog = ({ liveLink }: dialogProps) => {
     if (!liveLink) return null;
 
     return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <button className="mt-4 pt-3 text-left">
-                    <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-2">
-                        Live Link
-                    </span>
-                    <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:underline">
-                        Visit →
-                    </span>
-                </button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className="bg-(--color-bg) border border-(--color-border-mid) text-(--color-text)">
-                <AlertDialogHeader>
-                    <AlertDialogTitle className="text-(--color-text) font-display">Heads up</AlertDialogTitle>
-                    <AlertDialogDescription className="text-(--color-text-mid) font-mono text-sm">
-                        This one&apos;s still in progress. You might run into rough edges, placeholder content, or features that aren&apos;t quite there yet. That&apos;s intentional, it&apos;s a live build, not a finished product.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel className="bg-transparent border border-(--color-border-mid) text-(--color-text-dim) font-mono text-[0.6rem] tracking-[0.2em] uppercase hover:bg-(--color-bg-subtle) hover:text-(--color-text) transition-colors" variant="outline" size="sm">Go back</AlertDialogCancel>
-                    <AlertDialogAction
-                        variant="outline"
-                        size="sm"
-                        onClick={() => window.open(liveLink, '_blank', 'noopener,noreferrer')}
-                        className="bg-transparent border border-(--color-border-mid) text-(--color-text-dim) font-mono text-[0.6rem] tracking-[0.2em] uppercase hover:bg-(--color-bg-subtle) hover:text-(--color-text) transition-colors"
-                    >
-                        Understood, lets go →
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+        <div>
+            <a ref={linkRef} href={liveLink} target="_blank" rel="noopener noreferrer" className="hidden" />
+            <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <button className="mt-4 pt-3 text-left">
+                        <span className="block font-mono text-[0.6rem] tracking-[0.25em] uppercase text-(--color-text-dim) mb-2">
+                            Live Link
+                        </span>
+                        <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-(--color-accent) hover:underline">
+                            Visit →
+                        </span>
+                    </button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-(--color-bg) border border-(--color-border-mid) text-(--color-text)">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle className="text-(--color-text) font-display">Heads up</AlertDialogTitle>
+                        <AlertDialogDescription className="text-(--color-text-mid) font-mono text-sm">
+                            This one&apos;s still in progress. You might run into rough edges, placeholder content, or features that aren&apos;t quite there yet. That&apos;s intentional, it&apos;s a live build, not a finished product.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel className="bg-transparent border border-(--color-border-mid) text-(--color-text-dim) font-mono text-[0.6rem] tracking-[0.2em] uppercase hover:bg-(--color-bg-subtle) hover:text-(--color-text) transition-colors" variant="outline" size="sm">Go back</AlertDialogCancel>
+                        <AlertDialogAction
+                            variant="outline"
+                            size="sm"
+                            onClick={() => linkRef.current?.click()}
+                            className="bg-transparent border border-(--color-border-mid) text-(--color-text-dim) font-mono text-[0.6rem] tracking-[0.2em] uppercase hover:bg-(--color-bg-subtle) hover:text-(--color-text) transition-colors"
+                        >
+                            Understood, lets go →
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+        </div>
     );
 }
 
