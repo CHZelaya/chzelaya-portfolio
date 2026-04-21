@@ -21,6 +21,7 @@
     "@tabler/icons-react": "^3.41.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "convex": "^1.35.1",
     "countries-list": "^3.3.0",
     "lucide-react": "^1.8.0",
     "motion": "^12.38.0",
