@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Image from "next/image";
-import Link from "next/link";
 import { FEATURED_MEDIA_QUERYResult } from "@/sanity/types";
-import { urlFor } from "@/sanity/lib/image";
 import PhotoStack from '../ui/PhotoStack';
 import HandWrittenText from '../ui/HandWrittenText';
 

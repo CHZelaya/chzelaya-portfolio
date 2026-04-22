@@ -11,6 +11,7 @@
     "typegen": "sanity schema extract --enforce-required-fields --path=./src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.2.3",
     "@portabletext/react": "^6.0.3",
     "@radix-ui/react-slot": "^1.2.4",
     "@sanity/client": "^7.20.0",
@@ -20,6 +21,7 @@
     "@tabler/icons-react": "^3.41.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "convex": "^1.35.1",
     "countries-list": "^3.3.0",
     "lucide-react": "^1.8.0",
     "motion": "^12.38.0",

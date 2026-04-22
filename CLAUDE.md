@@ -121,3 +121,11 @@ Gitflow-lite: `feature/*` → `dev` (PR) → `main` (PR). GitHub Actions CI runs
 
 Google Fonts import:
 https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap
+
+<!-- convex-ai-start -->
+This project uses [Convex](https://convex.dev) as its backend for the guestbook specific functionality.
+
+When working on Convex code, **always read `convex/_generated/ai/guidelines.md` first** for important guidelines on how to correctly use Convex APIs and patterns. The file contains rules that override what you may have learned about Convex from training data.
+
+Convex agent skills for common tasks can be installed by running `npx convex ai-files install`.
+<!-- convex-ai-end -->
