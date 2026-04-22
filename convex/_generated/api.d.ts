@@ -8,7 +8,7 @@
  * @module
  */
 
-import type * as stub from "../stub.js";
+import type * as guestbook_posts from "../guestbook_posts.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +17,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  stub: typeof stub;
+  guestbook_posts: typeof guestbook_posts;
 }>;
 
 /**
