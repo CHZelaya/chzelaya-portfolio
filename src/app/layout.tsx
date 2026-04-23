@@ -1,8 +1,11 @@
+
 import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat, Nunito, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from '@clerk/nextjs'
+import ConvexClientProvider from "@/lib/ConvexClientProvider";
+
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -60,8 +63,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(bebas.variable, jetbrains.variable, cormorant.variable, caveat.variable, nunito.variable, "font-sans", inter.variable)}>
       <body>
-        <ClerkProvider>
-          {children}
+        <ClerkProvider publishableKey="pk_test_aHVtYmxlLWpvZXktNzYuY2xlcmsuYWNjb3VudHMuZGV2JA">
+          <ConvexClientProvider>
+            {children}
+          </ConvexClientProvider>
         </ClerkProvider>
       </body>
     </html>
