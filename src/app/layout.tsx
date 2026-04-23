@@ -1,15 +1,13 @@
+
 import type { Metadata } from "next";
 import { Bebas_Neue, JetBrains_Mono, Cormorant_Garamond, Caveat, Nunito, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ClerkProvider, useAuth } from '@clerk/nextjs'
-import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { ConvexReactClient } from "convex/react";
+import { ClerkProvider } from '@clerk/nextjs'
+import ConvexClientProvider from "@/lib/ConvexClientProvider";
+
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-
-const convex = new ConvexReactClient(
-  process.env.NEXT_PUBLIC_CONVEX_URL as string)
 
 const bebas = Bebas_Neue({
   weight: "400",
@@ -65,10 +63,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(bebas.variable, jetbrains.variable, cormorant.variable, caveat.variable, nunito.variable, "font-sans", inter.variable)}>
       <body>
-        <ClerkProvider>
-          <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+        <ClerkProvider publishableKey="pk_test_aHVtYmxlLWpvZXktNzYuY2xlcmsuYWNjb3VudHMuZGV2JA">
+          <ConvexClientProvider>
             {children}
-          </ConvexProviderWithClerk>
+          </ConvexClientProvider>
         </ClerkProvider>
       </body>
     </html>
