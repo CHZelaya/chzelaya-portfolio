@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.2.3",
+    "@clerk/ui": "^1.6.5",
     "@portabletext/react": "^6.0.3",
     "@radix-ui/react-slot": "^1.2.4",
     "@sanity/client": "^7.20.0",
