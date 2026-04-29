@@ -9,4 +9,14 @@ export default defineSchema({
   numbers: defineTable({
     value: v.number(),
   }),
+  guestbook: defineTable({
+    authorId: v.string(),
+    authorName: v.string(),
+    authorAvatar: v.string(),
+    authorPlatform: v.string(),
+    comment: v.string(),
+    by_createdAt: v.number(),
+  }).index("createdAt", ["by_createdAt"])
+    .index("by_authorId", ["authorId"]),
+
 });
