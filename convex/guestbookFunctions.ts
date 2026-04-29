@@ -4,6 +4,7 @@ import { query, mutation } from "./_generated/server";
 
 // Convex Query to list all guestbook entries, ordered by creation time (most recent first).
 export const listGuestbookEntries = query({
+    args: { guestbook: v.id("guestbook") },
     handler: async (ctx) => {
         const entries = await ctx.db
             .query("guestbook")
