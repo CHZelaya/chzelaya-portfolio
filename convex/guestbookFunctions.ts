@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation, action } from "./_generated/server";
+import { query, mutation } from "./_generated/server";
 
 
 // Convex Query to list all guestbook entries, ordered by creation time (most recent first).
