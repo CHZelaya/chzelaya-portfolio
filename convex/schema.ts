@@ -16,4 +16,5 @@ export default defineSchema({
   }).index("createdAt", ["by_createdAt"])
     .index("by_authorId", ["authorId"]),
 
+
 });

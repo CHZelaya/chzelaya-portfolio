@@ -11,7 +11,7 @@ export default function FrontendLayout({
   return (
     <>
       {children}
-      <SanityLive />
+      {process.env.NODE_ENV === 'production' && <SanityLive />}
     </>
   )
 }
